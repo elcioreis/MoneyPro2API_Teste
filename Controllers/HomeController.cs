@@ -3,6 +3,7 @@ using MoneyPro2.Data;
 using System.Diagnostics;
 
 namespace MoneyPro2.Controllers;
+
 [ApiController]
 [Route("")]
 public class HomeController : ControllerBase

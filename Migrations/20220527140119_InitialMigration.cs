@@ -10,6 +10,23 @@ namespace MoneyPro2.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "Coin",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INT", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nickname = table.Column<string>(type: "VARCHAR(25)", maxLength: 25, nullable: false),
+                    Symbol = table.Column<string>(type: "VARCHAR(10)", maxLength: 10, nullable: false),
+                    Default = table.Column<bool>(type: "BIT", nullable: false),
+                    Virtual = table.Column<bool>(type: "BIT", nullable: false),
+                    Active = table.Column<bool>(type: "BIT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Coin", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
                 {
@@ -87,6 +104,11 @@ namespace MoneyPro2.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Coin",
+                columns: new[] { "Id", "Active", "Default", "Nickname", "Symbol", "Virtual" },
+                values: new object[] { 1, true, true, "Real Brasileiro", "R$", false });
+
+            migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "Name", "Slug" },
                 values: new object[] { 1, "admin", "admin" });
@@ -95,6 +117,18 @@ namespace MoneyPro2.Migrations
                 table: "Role",
                 columns: new[] { "Id", "Name", "Slug" },
                 values: new object[] { 2, "user", "user" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Coin_Nickname",
+                table: "Coin",
+                column: "Nickname",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Coin_Symbol",
+                table: "Coin",
+                column: "Symbol",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Login_UserId_LoginDate",
@@ -134,6 +168,9 @@ namespace MoneyPro2.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Coin");
+
             migrationBuilder.DropTable(
                 name: "Login");
 

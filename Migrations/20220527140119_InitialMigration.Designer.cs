@@ -12,7 +12,7 @@ using MoneyPro2.Data;
 namespace MoneyPro2.Migrations
 {
     [DbContext(typeof(MoneyDataContext))]
-    [Migration("20220526191529_InitialMigration")]
+    [Migration("20220527140119_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,61 @@ namespace MoneyPro2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("MoneyPro2.Models.Coin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("BIT")
+                        .HasColumnName("Active");
+
+                    b.Property<bool>("Default")
+                        .HasColumnType("BIT")
+                        .HasColumnName("Default");
+
+                    b.Property<string>("Nickname")
+                        .IsRequired()
+                        .HasMaxLength(25)
+                        .HasColumnType("VARCHAR(25)")
+                        .HasColumnName("Nickname");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("VARCHAR(10)")
+                        .HasColumnName("Symbol");
+
+                    b.Property<bool>("Virtual")
+                        .HasColumnType("BIT")
+                        .HasColumnName("Virtual");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Nickname" }, "IX_Coin_Nickname")
+                        .IsUnique();
+
+                    b.HasIndex(new[] { "Symbol" }, "IX_Coin_Symbol")
+                        .IsUnique();
+
+                    b.ToTable("Coin", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            Default = true,
+                            Nickname = "Real Brasileiro",
+                            Symbol = "R$",
+                            Virtual = false
+                        });
+                });
 
             modelBuilder.Entity("MoneyPro2.Models.Login", b =>
                 {

@@ -110,7 +110,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM1MDI3OTQsImV4cCI6MTY1MzUzMTU5NCwiaWF0IjoxNjUzNTAyNzk0fQ.jpKCDHdyRVl03hZX8mOLFzlxHNB-y_KZUQExpfiwF0A",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM1OTI2MDIsImV4cCI6MTY1MzYyMTQwMiwiaWF0IjoxNjUzNTkyNjAyfQ.K-70uQ4ziIxs5Selj5k0y5SIDunH8kxDTP0xN08YY4M",
 							"type": "string"
 						}
 					]
@@ -127,6 +127,273 @@
 					"path": [
 						"v1",
 						"logintest"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1/Coin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7151/v1/coin",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7151",
+					"path": [
+						"v1",
+						"coin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1/Coin/Default",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7151/v1/coin/default",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7151",
+					"path": [
+						"v1",
+						"coin",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1/Coin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NTczMDMsImV4cCI6MTY1MzY4NjEwMywiaWF0IjoxNjUzNjU3MzAzfQ.tkhUy7gOqpzu0YBsyyWxa__RBUgWkbVhVv-RHChaKrU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nickname\": \"BitCoin\",\r\n    \"symbol\": \"BTC\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7151/v1/coin",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7151",
+					"path": [
+						"v1",
+						"coin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1/Coin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nickname\": \"Dolar Americano\",\r\n    \"symbol\": \"US$\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7151/v1/coin/2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7151",
+					"path": [
+						"v1",
+						"coin",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1/Coin/Default",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7151/v1/coin/default/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7151",
+					"path": [
+						"v1",
+						"coin",
+						"default",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1/Coin/Virtual",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7151/v1/coin/virtual/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7151",
+					"path": [
+						"v1",
+						"coin",
+						"virtual",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1/Coin/Active",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7151/v1/coin/active/3",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7151",
+					"path": [
+						"v1",
+						"coin",
+						"active",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "v1/Coin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM4NTI5MzcsImV4cCI6MTY1Mzg4MTczNywiaWF0IjoxNjUzODUyOTM3fQ.4B5bgHloUGC43ZEpiLjw_1da9HGOymDSgld5Q_Xe2bU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7151/v1/coin/4",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7151",
+					"path": [
+						"v1",
+						"coin",
+						"4"
 					]
 				}
 			},
