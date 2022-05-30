@@ -57,6 +57,12 @@ namespace MoneyPro2.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex(new[] { "Nickname" }, "IX_Coin_Nickname")
+                        .IsUnique();
+
+                    b.HasIndex(new[] { "Symbol" }, "IX_Coin_Symbol")
+                        .IsUnique();
+
                     b.ToTable("Coin", (string)null);
 
                     b.HasData(

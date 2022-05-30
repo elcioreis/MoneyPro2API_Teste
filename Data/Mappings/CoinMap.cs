@@ -41,5 +41,8 @@ public class CoinMap : IEntityTypeConfiguration<Coin>
             .IsRequired()
             .HasColumnName("Active")
             .HasColumnType("BIT");
+
+        builder.HasIndex(x => x.Symbol, "IX_Coin_Symbol").IsUnique();
+        builder.HasIndex(x => x.Nickname, "IX_Coin_Nickname").IsUnique();
     }
 }

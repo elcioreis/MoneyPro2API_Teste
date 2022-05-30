@@ -15,8 +15,6 @@ namespace MoneyPro2.Controllers;
 [ApiController]
 public class UserController : ControllerBase
 {
-    public int RoleEnum { get; private set; }
-
     [HttpPost("v1/register")]
     public async Task<IActionResult> RegisterAsync(
         [FromBody] RegisterViewModel model,
@@ -35,7 +33,8 @@ public class UserController : ControllerBase
         };
 
         var role = context.Roles.FirstOrDefault(x => x.Slug == "user");
-        user.Roles.Add(role);
+        if (role != null)
+            user.Roles.Add(role);
 
         try
         {
@@ -46,7 +45,7 @@ public class UserController : ControllerBase
         }
         catch (DbUpdateException)
         {
-            return StatusCode(400, new ResultViewModel<string>("E02X01 - Este E-mail já está cadastrado"));
+            return StatusCode(400, new ResultViewModel<User>("E02X01 - Este E-mail já está cadastrado"));
         }
         catch (Exception)
         {
