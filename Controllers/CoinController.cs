@@ -112,7 +112,7 @@ public class CoinController : ControllerBase
             coin.Symbol = model.Symbol;
 
             _ = context.Coins.Update(coin);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return Ok(new ResultViewModel<Coin>(coin));
         }
@@ -149,7 +149,7 @@ public class CoinController : ControllerBase
             coin.Virtual = !coin.Virtual;
 
             context.Coins.Update(coin);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return Ok(new ResultViewModel<Coin>(coin));
         }
@@ -187,7 +187,7 @@ public class CoinController : ControllerBase
             {
                 context.Coins.Update(newDefault);
                 context.Coins.Update(oldDefault);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 dbTransaction.Commit();
                 return Ok(new ResultViewModel<Coin>(newDefault));
@@ -219,7 +219,7 @@ public class CoinController : ControllerBase
             coin.Active = !coin.Active;
 
             context.Coins.Update(coin);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return Ok(new ResultViewModel<Coin>(coin));
         }

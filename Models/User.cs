@@ -18,4 +18,6 @@ public class User
     public IList<Role> Roles { get; set; }
     [JsonIgnore]
     public IList<Login> Logins { get; set; }
+    [JsonIgnore]
+    public IList<InstitutionType> InstitutionTypes { get; set; }
 }
