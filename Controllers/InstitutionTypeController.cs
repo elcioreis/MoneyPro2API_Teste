@@ -14,19 +14,45 @@ namespace MoneyPro2.Controllers;
 [ApiController]
 public class InstitutionTypeController : ControllerBase
 {
-    [HttpGet("v1/institutiontype")]
+    [HttpGet("v1/institutiontype/all")]
     [Authorize(Roles = "user")]
-    public async Task<IActionResult> GetAsync(
+    public async Task<IActionResult> GetAllAsync(
         [FromServices] MoneyDataContext context)
     {
         if (Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier).Value, out int userId))
         {
-
             try
             {
                 var institutionTypes = await context.InstitutionTypes
                     .AsNoTracking()
                     .Where(x => x.UserId == userId)
+                    .OrderBy(x => x.Nickname).ToListAsync();
+
+                return Ok(new ResultViewModel<List<InstitutionType>>(institutionTypes));
+            }
+            catch (Exception)
+            {
+                return StatusCode(500, new ResultViewModel<List<InstitutionType>>("E04X00 - Falha interna no servidor"));
+            }
+        }
+        else
+        {
+            return StatusCode(401, new ResultViewModel<List<InstitutionType>>("E04X01 - Não autorizado"));
+        }
+    }
+
+    [HttpGet("v1/institutiontype/active")]
+    [Authorize(Roles = "user")]
+    public async Task<IActionResult> GetActiveAsync(
+       [FromServices] MoneyDataContext context)
+    {
+        if (Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier).Value, out int userId))
+        {
+            try
+            {
+                var institutionTypes = await context.InstitutionTypes
+                    .AsNoTracking()
+                    .Where(x => x.UserId == userId && x.Active)
                     .OrderBy(x => x.Nickname).ToListAsync();
 
                 return Ok(new ResultViewModel<List<InstitutionType>>(institutionTypes));
@@ -99,16 +125,16 @@ public class InstitutionTypeController : ControllerBase
         if (!Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier).Value, out int userId))
             return StatusCode(401, new ResultViewModel<List<InstitutionType>>("E04X07 - Não autorizado"));
 
-        var institutionType = await context.InstitutionTypes.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
-
-        if (institutionType == null)
-            return NotFound(new ResultViewModel<InstitutionType>("E04X08 - Conteúdo não encontrado"));
-
-        institutionType.Nickname = model.Nickname;
-        institutionType.Description = model.Description;
-
         try
         {
+            var institutionType = await context.InstitutionTypes.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+
+            if (institutionType == null)
+                return NotFound(new ResultViewModel<InstitutionType>("E04X08 - Conteúdo não encontrado"));
+
+            institutionType.Nickname = model.Nickname;
+            institutionType.Description = model.Description;
+
             context.InstitutionTypes.Update(institutionType);
             await context.SaveChangesAsync();
 
@@ -140,13 +166,13 @@ public class InstitutionTypeController : ControllerBase
         if (!Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier).Value, out int userId))
             return StatusCode(401, new ResultViewModel<List<InstitutionType>>("E04X11 - Não autorizado"));
 
-        var institutionType = await context.InstitutionTypes.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
-
-        if (institutionType == null)
-            return NotFound(new ResultViewModel<InstitutionType>("E04X12 - Conteúdo não encontrado"));
-
         try
         {
+            var institutionType = await context.InstitutionTypes.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+
+            if (institutionType == null)
+                return NotFound(new ResultViewModel<InstitutionType>("E04X12 - Conteúdo não encontrado"));
+
             context.InstitutionTypes.Remove(institutionType);
             await context.SaveChangesAsync();
 
@@ -166,5 +192,33 @@ public class InstitutionTypeController : ControllerBase
             return StatusCode(500, new ResultViewModel<Coin>("E04X14 - Falha interna no servidor"));
         }
     }
-}
 
+    [HttpPut("v1/institutiontype/active/{id:int}")]
+    [Authorize(Roles = "user")]
+    public async Task<IActionResult> ChangeActiveAsync(
+        [FromRoute] int id,
+        [FromServices] MoneyDataContext context)
+    {
+        if (!Int32.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
+            return StatusCode(401, new ResultViewModel<InstitutionType>("E04X15 - Não autorizado"));
+
+        try
+        {
+            var institutionType = await context.InstitutionTypes.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+
+            if (institutionType == null)
+                return NotFound(new ResultViewModel<InstitutionType>("E04X16 - Conteúdo não encontrado"));
+
+            institutionType.Active = !institutionType.Active;
+
+            context.InstitutionTypes.Update(institutionType);
+            await context.SaveChangesAsync();
+
+            return Ok(new ResultViewModel<InstitutionType>(institutionType));
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new ResultViewModel<InstitutionType>("E04X17 - Falha interna no servidor"));
+        }
+    }
+}

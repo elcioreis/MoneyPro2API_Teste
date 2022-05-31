@@ -13,14 +13,30 @@ namespace MoneyPro2.Controllers;
 [ApiController]
 public class CoinController : ControllerBase
 {
-    [HttpGet("v1/coin")]
+    [HttpGet("v1/coin/all")]
     [Authorize(Roles = "user")]
-    public async Task<IActionResult> GetAsync(
+    public async Task<IActionResult> GetAllAsync(
         [FromServices] MoneyDataContext context)
     {
         try
         {
             var coins = await context.Coins.AsNoTracking().ToListAsync();
+            return Ok(new ResultViewModel<List<Coin>>(coins));
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new ResultViewModel<List<Coin>>("E03X00 - Falha interna no servidor"));
+        }
+    }
+
+    [HttpGet("v1/coin/active")]
+    [Authorize(Roles = "user")]
+    public async Task<IActionResult> GetActiveAsync(
+    [FromServices] MoneyDataContext context)
+    {
+        try
+        {
+            var coins = await context.Coins.AsNoTracking().Where(x => x.Active).ToListAsync();
             return Ok(new ResultViewModel<List<Coin>>(coins));
         }
         catch (Exception)
