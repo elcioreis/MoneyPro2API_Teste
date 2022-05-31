@@ -13,14 +13,30 @@ namespace MoneyPro2.Controllers;
 [ApiController]
 public class CoinController : ControllerBase
 {
-    [HttpGet("v1/coin")]
+    [HttpGet("v1/coin/all")]
     [Authorize(Roles = "user")]
-    public async Task<IActionResult> GetAsync(
+    public async Task<IActionResult> GetAllAsync(
         [FromServices] MoneyDataContext context)
     {
         try
         {
             var coins = await context.Coins.AsNoTracking().ToListAsync();
+            return Ok(new ResultViewModel<List<Coin>>(coins));
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new ResultViewModel<List<Coin>>("E03X00 - Falha interna no servidor"));
+        }
+    }
+
+    [HttpGet("v1/coin/active")]
+    [Authorize(Roles = "user")]
+    public async Task<IActionResult> GetActiveAsync(
+    [FromServices] MoneyDataContext context)
+    {
+        try
+        {
+            var coins = await context.Coins.AsNoTracking().Where(x => x.Active).ToListAsync();
             return Ok(new ResultViewModel<List<Coin>>(coins));
         }
         catch (Exception)
@@ -112,7 +128,7 @@ public class CoinController : ControllerBase
             coin.Symbol = model.Symbol;
 
             _ = context.Coins.Update(coin);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return Ok(new ResultViewModel<Coin>(coin));
         }
@@ -149,7 +165,7 @@ public class CoinController : ControllerBase
             coin.Virtual = !coin.Virtual;
 
             context.Coins.Update(coin);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return Ok(new ResultViewModel<Coin>(coin));
         }
@@ -187,7 +203,7 @@ public class CoinController : ControllerBase
             {
                 context.Coins.Update(newDefault);
                 context.Coins.Update(oldDefault);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
 
                 dbTransaction.Commit();
                 return Ok(new ResultViewModel<Coin>(newDefault));
@@ -219,7 +235,7 @@ public class CoinController : ControllerBase
             coin.Active = !coin.Active;
 
             context.Coins.Update(coin);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             return Ok(new ResultViewModel<Coin>(coin));
         }

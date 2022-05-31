@@ -68,13 +68,11 @@ public class UserMap : IEntityTypeConfiguration<User>
                     .WithMany()
                     .HasForeignKey("RoleId")
                     .HasConstraintName("FK_UserRole_RoleId"),
-                //.OnDelete(DeleteBehavior.Cascade),
                 user => user
                     .HasOne<User>()
                     .WithMany()
                     .HasForeignKey("UserId")
                     .HasConstraintName("FK_UserRole_UserId"));
-        //.OnDelete(DeleteBehavior.Cascade)); ; ;
 
         builder
             .HasMany(x => x.Logins)
@@ -82,5 +80,13 @@ public class UserMap : IEntityTypeConfiguration<User>
             .HasForeignKey("UserId")
             .HasConstraintName("Fk_Login_User")
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .HasMany(x => x.InstitutionTypes)
+            .WithOne(x => x.User)
+            .HasForeignKey("UserId")
+            .HasConstraintName("Fk_InstitutionTypes_User")
+            .OnDelete(DeleteBehavior.Cascade);
+
     }
 }

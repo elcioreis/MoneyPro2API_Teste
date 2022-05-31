@@ -7,71 +7,624 @@
 	},
 	"item": [
 		{
-			"name": "Health Check",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Ping",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/ping",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"ping"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Register",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"name\":\"Elcio Marques dos Reis\",\r\n    \"email\":\"elcio.reis@gmail.com\",\r\n    \"controlstart\":\"2015-04-30\",\r\n    \"password\":\"reis@L3pr1l0p3\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Coin",
+			"item": [
+				{
+					"name": "v1/Coin/All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwMDAxNTksImV4cCI6MTY1NDAyODk1OSwiaWF0IjoxNjU0MDAwMTU5fQ.in887VEYMAg3Li0Bq1Pyt0o9JwvaE-CxVI1URdgW8co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"all"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "https://localhost:7151/v1/register",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"register"
-					]
+				{
+					"name": "v1/Coin/Active",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwMDAxNTksImV4cCI6MTY1NDAyODk1OSwiaWF0IjoxNjU0MDAwMTU5fQ.in887VEYMAg3Li0Bq1Pyt0o9JwvaE-CxVI1URdgW8co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/active",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Coin/Default",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/default",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"default"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Coin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwMDAxNTksImV4cCI6MTY1NDAyODk1OSwiaWF0IjoxNjU0MDAwMTU5fQ.in887VEYMAg3Li0Bq1Pyt0o9JwvaE-CxVI1URdgW8co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickname\": \"Dolar Americano\",\r\n    \"symbol\": \"US$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/coin",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Coin/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickname\": \"Dolar Americano\",\r\n    \"symbol\": \"US$\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Coin/Default/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/default/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"default",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Coin/Virtual/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/virtual/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"virtual",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Coin/Active/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwMDAxNTksImV4cCI6MTY1NDAyODk1OSwiaWF0IjoxNjU0MDAwMTU5fQ.in887VEYMAg3Li0Bq1Pyt0o9JwvaE-CxVI1URdgW8co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/active/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"active",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Coin",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM4NTI5MzcsImV4cCI6MTY1Mzg4MTczNywiaWF0IjoxNjUzODUyOTM3fQ.4B5bgHloUGC43ZEpiLjw_1da9HGOymDSgld5Q_Xe2bU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"4"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "v1/LoginTest",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM5MjUzMDEsImV4cCI6MTY1Mzk1NDEwMSwiaWF0IjoxNjUzOTI1MzAxfQ.tCBmOhDXyTyt0uSBLIntULugvYKDmD8m65wehjr3slA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/logintest",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"logintest"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Elcio Marques dos Reis\",\r\n    \"email\":\"elcio.reis@gmail.com\",\r\n    \"controlstart\":\"2015-04-30\",\r\n    \"password\":\"reis@L3pr1l0p3\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home",
+			"item": [
+				{
+					"name": "Ping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/ping",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"ping"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "InstitutionType",
+			"item": [
+				{
+					"name": "v1/InstitutionType/All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwMDAxNTksImV4cCI6MTY1NDAyODk1OSwiaWF0IjoxNjU0MDAwMTU5fQ.in887VEYMAg3Li0Bq1Pyt0o9JwvaE-CxVI1URdgW8co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/institutiontype/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institutiontype",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/InstitutionType/Active",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwMDAxNTksImV4cCI6MTY1NDAyODk1OSwiaWF0IjoxNjU0MDAwMTU5fQ.in887VEYMAg3Li0Bq1Pyt0o9JwvaE-CxVI1URdgW8co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/institutiontype/active",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institutiontype",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/institutiontype",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM5Mzc0MTUsImV4cCI6MTY1Mzk2NjIxNSwiaWF0IjoxNjUzOTM3NDE1fQ.30teis2UHuIIZUsG-q21JJ43xMx4CY00Nm6Z1tTZLz8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickname\":\"Ticket\",\r\n    \"description\":\"Administradora de Ticket Refeição ou Alimentação\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/institutiontype",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institutiontype"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/InstitutionType/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM5Mzc0MTUsImV4cCI6MTY1Mzk2NjIxNSwiaWF0IjoxNjUzOTM3NDE1fQ.30teis2UHuIIZUsG-q21JJ43xMx4CY00Nm6Z1tTZLz8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nickname\":\"Particular\",\r\n    \"description\":\"Recursos mantidos fora de instituições\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/institutiontype/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institutiontype",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/InstitutionType/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwMDAxNTksImV4cCI6MTY1NDAyODk1OSwiaWF0IjoxNjU0MDAwMTU5fQ.in887VEYMAg3Li0Bq1Pyt0o9JwvaE-CxVI1URdgW8co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/institutiontype/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institutiontype",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/InstitutionType/Active/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwMDAxNTksImV4cCI6MTY1NDAyODk1OSwiaWF0IjoxNjU0MDAwMTU5fQ.in887VEYMAg3Li0Bq1Pyt0o9JwvaE-CxVI1URdgW8co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/institutiontype/active/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institutiontype",
+								"active",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "v1/Login",
@@ -97,303 +650,6 @@
 					"path": [
 						"v1",
 						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/LoginTest",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM1OTI2MDIsImV4cCI6MTY1MzYyMTQwMiwiaWF0IjoxNjUzNTkyNjAyfQ.K-70uQ4ziIxs5Selj5k0y5SIDunH8kxDTP0xN08YY4M",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/v1/logintest",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"logintest"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Coin",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/v1/coin",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"coin"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Coin/Default",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/v1/coin/default",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"coin",
-						"default"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Coin",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NTczMDMsImV4cCI6MTY1MzY4NjEwMywiaWF0IjoxNjUzNjU3MzAzfQ.tkhUy7gOqpzu0YBsyyWxa__RBUgWkbVhVv-RHChaKrU",
-							"type": "string"
-						}
-					]
-				},
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nickname\": \"BitCoin\",\r\n    \"symbol\": \"BTC\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://localhost:7151/v1/coin",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"coin"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Coin",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"nickname\": \"Dolar Americano\",\r\n    \"symbol\": \"US$\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "https://localhost:7151/v1/coin/2",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"coin",
-						"2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Coin/Default",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/v1/coin/default/1",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"coin",
-						"default",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Coin/Virtual",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/v1/coin/virtual/3",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"coin",
-						"virtual",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Coin/Active",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM2NzcwMDIsImV4cCI6MTY1MzcwNTgwMiwiaWF0IjoxNjUzNjc3MDAyfQ.KSCD9vIU7ak4azOGC2dBb8wLIi8pEr7AKH_cADMG-4Q",
-							"type": "string"
-						}
-					]
-				},
-				"method": "PUT",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/v1/coin/active/3",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"coin",
-						"active",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "v1/Coin",
-			"request": {
-				"auth": {
-					"type": "bearer",
-					"bearer": [
-						{
-							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM4NTI5MzcsImV4cCI6MTY1Mzg4MTczNywiaWF0IjoxNjUzODUyOTM3fQ.4B5bgHloUGC43ZEpiLjw_1da9HGOymDSgld5Q_Xe2bU",
-							"type": "string"
-						}
-					]
-				},
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "https://localhost:7151/v1/coin/4",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "7151",
-					"path": [
-						"v1",
-						"coin",
-						"4"
 					]
 				}
 			},

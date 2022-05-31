@@ -12,6 +12,7 @@ public class MoneyDataContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<Login> Logins { get; set; }
     public DbSet<Coin> Coins { get; set; }
+    public DbSet<InstitutionType> InstitutionTypes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,6 +20,7 @@ public class MoneyDataContext : DbContext
         modelBuilder.ApplyConfiguration(new RoleMap());
         modelBuilder.ApplyConfiguration(new LoginMap());
         modelBuilder.ApplyConfiguration(new CoinMap());
+        modelBuilder.ApplyConfiguration(new InstitutionTypeMap());
 
         // Insere os "Roles" ao criar o banco
         modelBuilder.Entity<Role>()
