@@ -3,12 +3,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MoneyPro2.Models;
 
 namespace MoneyPro2.Data.Mappings;
-public class InstitutionTypeMap : IEntityTypeConfiguration<InstitutionType>
+public class InstitutionMap : IEntityTypeConfiguration<Institution>
 {
-    public void Configure(EntityTypeBuilder<InstitutionType> builder)
+    public void Configure(EntityTypeBuilder<Institution> builder)
     {
-        builder.ToTable("InstitutionType");
-
+        builder.ToTable("Institution");
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
@@ -20,6 +19,11 @@ public class InstitutionTypeMap : IEntityTypeConfiguration<InstitutionType>
         builder.Property(x => x.UserId)
             .IsRequired()
             .HasColumnName("UserId")
+            .HasColumnType("INT");
+
+        builder.Property(x => x.InstitutionTypeId)
+            .IsRequired()
+            .HasColumnName("InstitutionTypeId")
             .HasColumnType("INT");
 
         builder.Property(x => x.Nickname)
@@ -34,19 +38,17 @@ public class InstitutionTypeMap : IEntityTypeConfiguration<InstitutionType>
             .HasColumnType("VARCHAR")
             .HasMaxLength(100);
 
+        builder.Property(x => x.BankNumber)
+            .IsRequired(false)
+            .HasColumnName("BankNumber")
+            .HasColumnType("INT");
+
         builder.Property(x => x.Active)
             .IsRequired()
             .HasColumnName("Active")
             .HasColumnType("BIT")
             .HasDefaultValueSql("1");
 
-        builder.HasIndex(x => new { x.UserId, x.Nickname }, "IX_InstitutionType_UserId_Nickname").IsUnique();
-
-        builder
-            .HasMany(x => x.Institutions)
-            .WithOne(x => x.InstitutionType)
-            .HasForeignKey("InstitutionTypeId")
-            .HasConstraintName("Fk_Institution_InstitutionType")
-            .OnDelete(DeleteBehavior.NoAction);
+        builder.HasIndex(x => new { x.UserId, x.Nickname }, "IX_Institution_UserId_Nickname").IsUnique();
     }
 }

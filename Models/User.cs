@@ -6,6 +6,8 @@ public class User
     public User()
     {
         Roles = new List<Role>();
+        InstitutionTypes = new List<InstitutionType>();
+        Institutions = new List<Institution>();
     }
     public int Id { get; set; }
     public string Name { get; set; }
@@ -20,4 +22,6 @@ public class User
     public IList<Login> Logins { get; set; }
     [JsonIgnore]
     public IList<InstitutionType> InstitutionTypes { get; set; }
+    [JsonIgnore]
+    public IList<Institution> Institutions { get; set; }
 }
