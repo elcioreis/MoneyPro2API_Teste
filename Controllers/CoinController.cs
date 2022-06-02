@@ -6,6 +6,7 @@ using MoneyPro2.Extensions;
 using MoneyPro2.Models;
 using MoneyPro2.ViewModel;
 using MoneyPro2.ViewModels.Coins;
+using System.Security.Claims;
 using System.Text.RegularExpressions;
 
 namespace MoneyPro2.Controllers;
@@ -20,7 +21,11 @@ public class CoinController : ControllerBase
     {
         try
         {
-            var coins = await context.Coins.AsNoTracking().ToListAsync();
+            var coins = await context.Coins
+                .AsNoTracking()
+                .OrderBy(x => x.Nickname)
+                .ToListAsync();
+
             return Ok(new ResultViewModel<List<Coin>>(coins));
         }
         catch (Exception)
@@ -36,12 +41,43 @@ public class CoinController : ControllerBase
     {
         try
         {
-            var coins = await context.Coins.AsNoTracking().Where(x => x.Active).ToListAsync();
+            var coins = await context.Coins
+                .AsNoTracking()
+                .Where(x => x.Active)
+                .OrderBy(x => x.Nickname)
+                .ToListAsync();
+
             return Ok(new ResultViewModel<List<Coin>>(coins));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<List<Coin>>("E03X00 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<List<Coin>>("E03X01 - Falha interna no servidor"));
+        }
+    }
+
+    [HttpGet("v1/coin/{id:int}")]
+    [Authorize(Roles = "user")]
+    public async Task<IActionResult> GetByIdAsync(
+        [FromRoute] int id,
+        [FromServices] MoneyDataContext context)
+    {
+        if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
+            return Unauthorized(new ResultViewModel<Coin>("E03X02 - Não autorizado"));
+
+        try
+        {
+            var coin = await context.Coins
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (coin == null)
+                return NotFound(new ResultViewModel<Coin>("E03X03 - Conteúdo não encontrado"));
+
+            return Ok(new ResultViewModel<Coin>(coin));
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new ResultViewModel<Coin>("E03X04 - Falha interna no servidor"));
         }
     }
 
@@ -54,14 +90,14 @@ public class CoinController : ControllerBase
         {
             var coin = await context.Coins.AsNoTracking().FirstOrDefaultAsync(x => x.Default);
 
-            if (coin != null)
-                return Ok(new ResultViewModel<Coin>(coin));
-            else
-                return NotFound(new ResultViewModel<Coin>("E03X01 - Conteúdo não encontrado"));
+            if (coin == null)
+                return NotFound(new ResultViewModel<Coin>("E03X05 - Conteúdo não encontrado"));
+
+            return Ok(new ResultViewModel<Coin>(coin));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<List<Coin>>("E03X02 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<List<Coin>>("E03X06 - Falha interna no servidor"));
         }
     }
 
@@ -72,7 +108,7 @@ public class CoinController : ControllerBase
         [FromServices] MoneyDataContext context)
     {
         if (!ModelState.IsValid)
-            return BadRequest(new ResultViewModel<Coin>(ModelState.GetErrors("E03X03 - Conteúdo mal formatado")));
+            return BadRequest(new ResultViewModel<Coin>(ModelState.GetErrors("E03X07 - Conteúdo mal formatado")));
 
         try
         {
@@ -97,13 +133,13 @@ public class CoinController : ControllerBase
             var chave = filtro.Replace(ex.InnerException?.Message ?? "", "");
 
             if (!string.IsNullOrEmpty(chave))
-                return StatusCode(400, new ResultViewModel<Coin>($"E03X04 - Moeda já cadastrada: {chave}"));
+                return StatusCode(400, new ResultViewModel<Coin>($"E03X08 - Moeda já cadastrada: {chave}"));
             else
-                return StatusCode(400, new ResultViewModel<Coin>("E03X04 - Moeda já cadastrada"));
+                return StatusCode(400, new ResultViewModel<Coin>("E03X08 - Moeda já cadastrada"));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<Coin>("E03X05 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<Coin>("E03X09 - Falha interna no servidor"));
         }
     }
 
@@ -115,19 +151,19 @@ public class CoinController : ControllerBase
         [FromServices] MoneyDataContext context)
     {
         if (!ModelState.IsValid)
-            return BadRequest(new ResultViewModel<Coin>(ModelState.GetErrors("E03X06 - Conteúdo mal formatado")));
+            return BadRequest(new ResultViewModel<Coin>(ModelState.GetErrors("E03X10 - Conteúdo mal formatado")));
 
         try
         {
             var coin = await context.Coins.FirstOrDefaultAsync(x => x.Id == id);
 
             if (coin == null)
-                return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X07 - Conteúdo não encontrado")));
+                return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X11 - Conteúdo não encontrado")));
 
             coin.Nickname = model.Nickname;
             coin.Symbol = model.Symbol;
 
-            _ = context.Coins.Update(coin);
+            context.Coins.Update(coin);
             await context.SaveChangesAsync();
 
             return Ok(new ResultViewModel<Coin>(coin));
@@ -139,13 +175,13 @@ public class CoinController : ControllerBase
             var chave = filtro.Replace(ex.InnerException?.Message ?? "", "");
 
             if (!string.IsNullOrEmpty(chave))
-                return StatusCode(400, new ResultViewModel<Coin>($"E03X08 - Moeda já cadastrada: {chave}"));
+                return StatusCode(400, new ResultViewModel<Coin>($"E03X12 - Moeda já cadastrada: {chave}"));
             else
-                return StatusCode(400, new ResultViewModel<Coin>("E03X08 - Moeda já cadastrada"));
+                return StatusCode(400, new ResultViewModel<Coin>("E03X12 - Moeda já cadastrada"));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<Coin>("E03X09 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<Coin>("E03X13 - Falha interna no servidor"));
         }
     }
 
@@ -160,7 +196,7 @@ public class CoinController : ControllerBase
             var coin = await context.Coins.FirstOrDefaultAsync(x => x.Id == id);
 
             if (coin == null)
-                return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X10 - Conteúdo não encontrado")));
+                return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X14 - Conteúdo não encontrado")));
 
             coin.Virtual = !coin.Virtual;
 
@@ -171,7 +207,7 @@ public class CoinController : ControllerBase
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<Coin>("E03X11 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<Coin>("E03X15 - Falha interna no servidor"));
         }
     }
 
@@ -184,7 +220,7 @@ public class CoinController : ControllerBase
         var newDefault = await context.Coins.FirstOrDefaultAsync(x => x.Id == id);
 
         if (newDefault == null)
-            return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X12 - Conteúdo não encontrado")));
+            return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X16 - Conteúdo não encontrado")));
 
         if (newDefault.Default)
             return Ok(new ResultViewModel<Coin>(newDefault));
@@ -192,7 +228,7 @@ public class CoinController : ControllerBase
         var oldDefault = await context.Coins.FirstOrDefaultAsync(x => x.Default);
 
         if (oldDefault == null)
-            return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X13 - Conteúdo não encontrado")));
+            return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X17 - Conteúdo não encontrado")));
 
         newDefault.Default = true;
         oldDefault.Default = false;
@@ -208,10 +244,10 @@ public class CoinController : ControllerBase
                 dbTransaction.Commit();
                 return Ok(new ResultViewModel<Coin>(newDefault));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 dbTransaction.Rollback();
-                return StatusCode(500, new ResultViewModel<Coin>("E03X14 - Falha interna no servidor"));
+                return StatusCode(500, new ResultViewModel<Coin>("E03X18 - Falha interna no servidor"));
             }
         }
     }
@@ -227,10 +263,10 @@ public class CoinController : ControllerBase
             var coin = await context.Coins.FirstOrDefaultAsync(x => x.Id == id);
 
             if (coin == null)
-                return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X15 - Conteúdo não encontrado")));
+                return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X19 - Conteúdo não encontrado")));
 
             if (coin.Default)
-                return BadRequest(new ResultViewModel<Coin>(ModelState.GetErrors("E03X16 - A moeda padrão não pode ser inativada")));
+                return BadRequest(new ResultViewModel<Coin>(ModelState.GetErrors("E03X20 - A moeda padrão não pode ser inativada")));
 
             coin.Active = !coin.Active;
 
@@ -241,7 +277,7 @@ public class CoinController : ControllerBase
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<Coin>("E03X17 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<Coin>("E03X21 - Falha interna no servidor"));
         }
     }
 
@@ -254,10 +290,10 @@ public class CoinController : ControllerBase
         var coin = await context.Coins.FirstOrDefaultAsync(x => x.Id == id);
 
         if (coin == null)
-            return NotFound(new ResultViewModel<Coin>("E03X18 - Conteúdo não encontrado"));
+            return NotFound(new ResultViewModel<Coin>("E03X22 - Conteúdo não encontrado"));
 
         if (coin.Default)
-            return BadRequest(new ResultViewModel<Coin>("E03X19 - A moeda padrão não pode ser excluída"));
+            return BadRequest(new ResultViewModel<Coin>("E03X23 - A moeda padrão não pode ser excluída"));
 
         try
         {
@@ -271,13 +307,13 @@ public class CoinController : ControllerBase
             var msg = ex.InnerException?.Message;
 
             if (!string.IsNullOrEmpty(msg))
-                return StatusCode(400, new ResultViewModel<Coin>($"E03X20 - Impossível excluir moeda: {msg}"));
+                return StatusCode(400, new ResultViewModel<Coin>($"E03X24 - Impossível excluir moeda: {msg}"));
             else
-                return StatusCode(400, new ResultViewModel<Coin>("E03X20 - Impossível excluir moeda"));
+                return StatusCode(400, new ResultViewModel<Coin>("E03X25 - Impossível excluir moeda"));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<Coin>("E03X21 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<Coin>("E03X26 - Falha interna no servidor"));
         }
     }
 }

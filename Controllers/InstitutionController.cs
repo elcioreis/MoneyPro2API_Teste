@@ -20,7 +20,7 @@ public class InstitutionController : ControllerBase
         [FromServices] MoneyDataContext context)
     {
         if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
-            return StatusCode(401, new ResultViewModel<List<Institution>>("E05X00 - Não autorizado"));
+            return Unauthorized(new ResultViewModel<List<Institution>>("E05X00 - Não autorizado"));
 
         try
         {
@@ -44,7 +44,7 @@ public class InstitutionController : ControllerBase
     [FromServices] MoneyDataContext context)
     {
         if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
-            return StatusCode(401, new ResultViewModel<List<Institution>>("E05X02 - Não autorizado"));
+            return Unauthorized(new ResultViewModel<List<Institution>>("E05X02 - Não autorizado"));
 
         try
         {
@@ -69,11 +69,12 @@ public class InstitutionController : ControllerBase
         [FromServices] MoneyDataContext context)
     {
         if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
-            return StatusCode(401, new ResultViewModel<Institution>("E05X04 - Não autorizado"));
+            return Unauthorized(new ResultViewModel<Institution>("E05X04 - Não autorizado"));
 
         try
         {
-            var institution = await context.Institutions.FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+            var institution = await context.Institutions
+                .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
             if (institution == null)
                 return NotFound(new ResultViewModel<Institution>("E05X05 - Conteúdo não encontrado"));
@@ -220,6 +221,36 @@ public class InstitutionController : ControllerBase
         catch (Exception)
         {
             return StatusCode(500, new ResultViewModel<Institution>("E05X20 - Falha interna no servidor"));
+        }
+    }
+
+    [HttpPut("v1/institution/active/{id:int}")]
+    [Authorize(Roles = "user")]
+    public async Task<IActionResult> ChangeActiveByIdAsync(
+        [FromRoute] int id,
+        [FromServices] MoneyDataContext context)
+    {
+        if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
+            return Unauthorized(new ResultViewModel<Institution>("E05X21 - Não autorizado"));
+
+        try
+        {
+            var institution = await context.Institutions
+                .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
+
+            if (institution == null)
+                return NotFound(new ResultViewModel<Institution>("E05X22 - Conteúdo não encontrado"));
+
+            institution.Active = !institution.Active;
+
+            context.Institutions.Update(institution);
+            await context.SaveChangesAsync();
+
+            return Ok(new ResultViewModel<Institution>(institution));
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new ResultViewModel<Institution>("E05X23 - Falha interna no servidor"));
         }
     }
 }

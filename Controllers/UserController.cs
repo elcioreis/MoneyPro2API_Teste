@@ -69,10 +69,10 @@ public class UserController : ControllerBase
             .FirstOrDefaultAsync(x => x.Email == model.Email);
 
         if (user == null)
-            return StatusCode(401, new ResultViewModel<string>("Usuário ou senha inválidos"));
+            return Unauthorized(new ResultViewModel<string>("Usuário ou senha inválidos"));
 
         if (user.PasswordHash != Hash.Generator(new LoginViewModel() { Email = model.Email, Password = model.Password }))
-            return StatusCode(401, new ResultViewModel<string>("Usuário ou senha inválidos"));
+            return Unauthorized(new ResultViewModel<string>("Usuário ou senha inválidos"));
 
         try
         {
@@ -87,12 +87,15 @@ public class UserController : ControllerBase
         }
     }
 
-    [Authorize(Roles = "user")]
     [HttpGet("v1/logintest")]
+    [Authorize(Roles = "user")]
     public async Task<IActionResult> GetAsync(
         [FromServices] MoneyDataContext context)
     {
-        if (Int32.TryParse(User.FindFirst(ClaimTypes.NameIdentifier).Value, out int id))
+        if (int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int id))
+            return Unauthorized(new ResultViewModel<User>("E02X05 - Não autorizado"));
+
+        try
         {
             var user = await context
                 .Users
@@ -101,13 +104,13 @@ public class UserController : ControllerBase
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
-                return StatusCode(401, new ResultViewModel<User>("E02X05 - Não autorizado"));
+                return Unauthorized(new ResultViewModel<User>("E02X06 - Não autorizado"));
 
             return Ok(new ResultViewModel<User>(user));
         }
-        else
+        catch (Exception)
         {
-            return StatusCode(401, new ResultViewModel<User>("E02X06 - Não autorizado"));
+            return StatusCode(500, new ResultViewModel<User>("E02X07 - Falha interna no servidor"));
         }
     }
 
@@ -115,7 +118,12 @@ public class UserController : ControllerBase
     {
         var remoteIpAddress = Request.HttpContext.Connection.RemoteIpAddress;
 
-        var login = new Login() { UserId = user.Id, LoginDate = DateTime.UtcNow, IpAddress = remoteIpAddress?.ToString() ?? "ignorado" };
+        var login = new Login()
+        {
+            UserId = user.Id,
+            LoginDate = DateTime.UtcNow,
+            IpAddress = remoteIpAddress?.ToString() ?? "ignorado"
+        };
 
         context.Logins.Add(login);
         context.SaveChangesAsync();
