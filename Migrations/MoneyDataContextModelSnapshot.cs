@@ -306,7 +306,7 @@ namespace MoneyPro2.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserRole");
+                    b.ToTable("UserRole", (string)null);
                 });
 
             modelBuilder.Entity("MoneyPro2.Models.Institution", b =>

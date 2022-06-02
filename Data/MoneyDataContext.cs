@@ -13,7 +13,7 @@ public class MoneyDataContext : DbContext
     public DbSet<Login> Logins { get; set; }
     public DbSet<Coin> Coins { get; set; }
     public DbSet<InstitutionType> InstitutionTypes { get; set; }
-    public DbSet<Institution> Institution { get; set; }
+    public DbSet<Institution> Institutions { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
