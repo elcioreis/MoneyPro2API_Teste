@@ -7,6 +7,10 @@
 #
 # Histórico de atualizações 
 # 
+# Branch20220531
+# Criação da classe Institution e seu mapeamento para o banco de 
+# dados, InstitutionController e InstitutionViewModel
+#
 # Branch20220530
 # Criação da classe InstitutionType e seu mapeamento para o banco de 
 # dados, InstitutionTypeController e InstitutionTypeViewModel

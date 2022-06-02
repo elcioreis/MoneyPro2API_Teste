@@ -5,7 +5,7 @@ using MoneyPro2.Data;
 using MoneyPro2.Extensions;
 using MoneyPro2.Models;
 using MoneyPro2.ViewModel;
-using MoneyPro2.ViewModels.InstitutionType;
+using MoneyPro2.ViewModels.Institution;
 using System.Security.Claims;
 using System.Text.RegularExpressions;
 

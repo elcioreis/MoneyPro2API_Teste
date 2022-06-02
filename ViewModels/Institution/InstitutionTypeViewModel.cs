@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace MoneyPro2.ViewModels.InstitutionType;
+namespace MoneyPro2.ViewModels.Institution;
 public class InstitutionTypeViewModel
 {
     [Required(ErrorMessage = "O apelido é obrigatório")]
