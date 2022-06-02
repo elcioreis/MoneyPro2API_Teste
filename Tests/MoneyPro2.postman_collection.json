@@ -103,6 +103,37 @@
 					"response": []
 				},
 				{
+					"name": "v1/Coin/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQyMDc1MTgsImV4cCI6MTY1NDIzNjMxOCwiaWF0IjoxNjU0MjA3NTE4fQ.yQg2ybtt98nSDl150XFGRLoDXQCMD59A8ta326kTDuo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/coin/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"coin",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "v1/Coin",
 					"request": {
 						"auth": {
@@ -483,6 +514,37 @@
 					"response": []
 				},
 				{
+					"name": "v1/InstitutionType/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQyMDc0NzcsImV4cCI6MTY1NDIzNjI3NywiaWF0IjoxNjU0MjA3NDc3fQ.4C0KvK-_oVjRPSawOmpZIXemBArK4s0NupFQRgx4XPo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/institutiontype/199",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institutiontype",
+								"199"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "v1/institutiontype",
 					"request": {
 						"auth": {
@@ -619,6 +681,223 @@
 								"institutiontype",
 								"active",
 								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Institution",
+			"item": [
+				{
+					"name": "v1/Institution/All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwNjI2OTgsImV4cCI6MTY1NDA5MTQ5OCwiaWF0IjoxNjU0MDYyNjk4fQ.vf4M-8wCvbDvURCZ3OMwv1wHvLU0T5Shck5hMtHkXDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/institution/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institution",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Institution/Active",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQwNjI2OTgsImV4cCI6MTY1NDA5MTQ5OCwiaWF0IjoxNjU0MDYyNjk4fQ.vf4M-8wCvbDvURCZ3OMwv1wHvLU0T5Shck5hMtHkXDE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/institution/active",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institution",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Institution/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQyMDc1MTgsImV4cCI6MTY1NDIzNjMxOCwiaWF0IjoxNjU0MjA3NTE4fQ.yQg2ybtt98nSDl150XFGRLoDXQCMD59A8ta326kTDuo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/institution/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institution",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Institution",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQxMDM4NzgsImV4cCI6MTY1NDEzMjY3OCwiaWF0IjoxNjU0MTAzODc4fQ.YUzueNS4U3BKEY4s6biwBLWHebZZn547I2fksvosyeo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"institutiontypeid\":5,\r\n    \"nickname\":\"Dinheiro\",\r\n    \"description\":\"Dinheiro em caixa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/institution",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Institution/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQxMDM4NzgsImV4cCI6MTY1NDEzMjY3OCwiaWF0IjoxNjU0MTAzODc4fQ.YUzueNS4U3BKEY4s6biwBLWHebZZn547I2fksvosyeo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"institutiontypeid\":5,\r\n    \"nickname\":\"Caixa\",\r\n    \"description\":\"Dinheiro mantido em espécie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/institution/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institution",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Institution/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQxNzE4ODYsImV4cCI6MTY1NDIwMDY4NiwiaWF0IjoxNjU0MTcxODg2fQ.WzuD1oD0oZ9e1xB1kINfgSezM9SloQR3TKKmVWvq5qI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"institutiontypeid\":5,\r\n    \"nickname\":\"Caixa\",\r\n    \"description\":\"Dinheiro mantido em espécie\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/institution/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institution",
+								"3"
 							]
 						}
 					},
