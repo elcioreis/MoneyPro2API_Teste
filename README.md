@@ -7,6 +7,13 @@
 #
 # Histórico de atualizações 
 # 
+# Branch20220603
+# Criação da classe Entry e seu mapeamento para o banco de dados,
+# controller EntryController e EntryViewModel
+# 
+# Branch20220602
+# Refatoração e padronização de retornos das classes controller
+# 
 # Branch20220531
 # Criação da classe Institution e seu mapeamento para o banco de 
 # dados, InstitutionController e InstitutionViewModel

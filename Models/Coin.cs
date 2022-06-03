@@ -3,6 +3,8 @@ public class Coin
 {
     public Coin()
     {
+        Nickname = String.Empty;
+        Symbol = String.Empty;
         Default = false;
         Virtual = false;
         Active = true;

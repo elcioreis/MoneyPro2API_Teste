@@ -36,19 +36,32 @@ public class UserController : ControllerBase
         if (role != null)
             user.Roles.Add(role);
 
+        var entry = new Entry()
+        {
+            Name = "Abertura de Balanço",
+            Description = "Abertura de Balanço",
+            Active = true,
+            System = true
+        };
+
+        using var dbTransaction = context.Database.BeginTransaction();
         try
         {
-            _ = context.Users.AddAsync(user);
+            await context.Users.AddAsync(user);
+            entry.User = user;
+            await context.Entries.AddAsync(entry);
             await context.SaveChangesAsync();
-
+            dbTransaction.Commit();
             return Ok(new ResultViewModel<User>(user));
         }
         catch (DbUpdateException)
         {
+            dbTransaction.Rollback();
             return StatusCode(400, new ResultViewModel<User>("E02X01 - Este E-mail já está cadastrado"));
         }
         catch (Exception)
         {
+            dbTransaction.Rollback();
             return StatusCode(500, new ResultViewModel<User>("E02X02 - Falha interna no servidor"));
         }
     }

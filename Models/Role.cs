@@ -3,6 +3,8 @@ public class Role
 {
     public Role()
     {
+        Name = String.Empty;
+        Slug = String.Empty;
         Users = new List<User>();
     }
     public int Id { get; set; }

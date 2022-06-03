@@ -5,3 +5,4 @@ E02 - UserController
 E03 - CoinController
 E04 - InstitutionTypeController
 E05 - InstitutionController
+E06 - EntryController

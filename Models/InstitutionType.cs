@@ -5,6 +5,9 @@ public class InstitutionType
 {
     public InstitutionType()
     {
+        User = new User();
+        Nickname = String.Empty;
+        Description = String.Empty;
         Institutions = new List<Institution>();
     }
     public int Id { get; set; }
