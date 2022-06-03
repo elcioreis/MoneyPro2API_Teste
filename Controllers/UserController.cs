@@ -66,6 +66,42 @@ public class UserController : ControllerBase
         }
     }
 
+    [HttpPut("v1/register")]
+    [Authorize(Roles = "user")]
+    public async Task<IActionResult> UpdateAsync(
+        [FromBody] UserViewModel model,
+        [FromServices] MoneyDataContext context)
+    {
+        if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
+            return Unauthorized(new ResultViewModel<User>("E02X03 - Não autorizado"));
+
+        if (!ModelState.IsValid)
+            return BadRequest(new ResultViewModel<User>(ModelState.GetErrors("E02X04 - Conteúdo mal formatado")));
+
+        try
+        {
+            var user = await context.Users
+                .FirstOrDefaultAsync(x => x.Id == userId);
+
+            if (user == null)
+                return NotFound(new ResultViewModel<User>("E02X05 - Conteúdo não encontrado"));
+
+            user.Name = model.Name;
+            user.Email = model.Email;
+            user.ControlStart = model.ControlStart;
+            user.Slug = model.Email.Replace("@", "-").Replace(".", "-");
+
+            context.Users.Update(user);
+            await context.SaveChangesAsync();
+
+            return Ok(new ResultViewModel<User>(user));
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, new ResultViewModel<User>("E02X06 - Falha interna no servidor"));
+        }
+    }
+
     [HttpPost("v1/login")]
     public async Task<IActionResult> LoginAsync(
         [FromBody] LoginViewModel model,
@@ -73,7 +109,7 @@ public class UserController : ControllerBase
         [FromServices] TokenService tokenService)
     {
         if (!ModelState.IsValid)
-            return BadRequest(new ResultViewModel<string>(ModelState.GetErrors("E02X03 - Conteúdo mal formatado")));
+            return BadRequest(new ResultViewModel<string>(ModelState.GetErrors("E02X07 - Conteúdo mal formatado")));
 
         var user = await context
             .Users
@@ -96,7 +132,7 @@ public class UserController : ControllerBase
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<User>("E02X04 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<User>("E02X08 - Falha interna no servidor"));
         }
     }
 
@@ -106,7 +142,7 @@ public class UserController : ControllerBase
         [FromServices] MoneyDataContext context)
     {
         if (int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int id))
-            return Unauthorized(new ResultViewModel<User>("E02X05 - Não autorizado"));
+            return Unauthorized(new ResultViewModel<User>("E02X09 - Não autorizado"));
 
         try
         {
@@ -117,13 +153,13 @@ public class UserController : ControllerBase
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
-                return Unauthorized(new ResultViewModel<User>("E02X06 - Não autorizado"));
+                return Unauthorized(new ResultViewModel<User>("E02X10 - Não autorizado"));
 
             return Ok(new ResultViewModel<User>(user));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<User>("E02X07 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<User>("E02X11 - Falha interna no servidor"));
         }
     }
 
