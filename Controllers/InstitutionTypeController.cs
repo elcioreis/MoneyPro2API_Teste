@@ -122,13 +122,13 @@ public class InstitutionTypeController : ControllerBase
             var chave = filtro.Replace(ex.InnerException?.Message ?? "", "");
 
             if (!string.IsNullOrEmpty(chave))
-                return StatusCode(400, new ResultViewModel<InstitutionType>($"E04X09 - Tipo de instituição já cadastrada para esse usuário: {chave}"));
+                return StatusCode(400, new ResultViewModel<InstitutionType>($"E04X0A - Tipo de instituição já cadastrada para esse usuário: {chave}"));
             else
-                return StatusCode(400, new ResultViewModel<InstitutionType>("E04X09 - Tipo de instituição já cadastrada para esse usuário"));
+                return StatusCode(400, new ResultViewModel<InstitutionType>("E04X0A - Tipo de instituição já cadastrada para esse usuário"));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<InstitutionType>("E04X10 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<InstitutionType>("E04X0B - Falha interna no servidor"));
         }
     }
 
@@ -140,10 +140,10 @@ public class InstitutionTypeController : ControllerBase
         [FromServices] MoneyDataContext context)
     {
         if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
-            return Unauthorized(new ResultViewModel<InstitutionType>("E04X11 - Não autorizado"));
+            return Unauthorized(new ResultViewModel<InstitutionType>("E04X0C - Não autorizado"));
 
         if (!ModelState.IsValid)
-            return BadRequest(new ResultViewModel<InstitutionType>(ModelState.GetErrors("E04X12 - Conteúdo mal formatado")));
+            return BadRequest(new ResultViewModel<InstitutionType>(ModelState.GetErrors("E04X0D - Conteúdo mal formatado")));
 
         try
         {
@@ -151,7 +151,7 @@ public class InstitutionTypeController : ControllerBase
                 .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
             if (institutionType == null)
-                return NotFound(new ResultViewModel<InstitutionType>("E04X13 - Conteúdo não encontrado"));
+                return NotFound(new ResultViewModel<InstitutionType>("E04X0E - Conteúdo não encontrado"));
 
             institutionType.Nickname = model.Nickname;
             institutionType.Description = model.Description;
@@ -168,13 +168,13 @@ public class InstitutionTypeController : ControllerBase
             var chave = filtro.Replace(ex.InnerException?.Message ?? "", "");
 
             if (!string.IsNullOrEmpty(chave))
-                return StatusCode(400, new ResultViewModel<InstitutionType>($"E04X14 - Tipo de instituição já cadastrada para esse usuário: {chave}"));
+                return StatusCode(400, new ResultViewModel<InstitutionType>($"E04X0F - Tipo de instituição já cadastrada para esse usuário: {chave}"));
             else
-                return StatusCode(400, new ResultViewModel<InstitutionType>("E04X14 - Tipo de instituição já cadastrada para esse usuário"));
+                return StatusCode(400, new ResultViewModel<InstitutionType>("E04X0F - Tipo de instituição já cadastrada para esse usuário"));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<InstitutionType>("E04X15 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<InstitutionType>("E04X10 - Falha interna no servidor"));
         }
     }
 
@@ -185,7 +185,7 @@ public class InstitutionTypeController : ControllerBase
         [FromServices] MoneyDataContext context)
     {
         if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
-            return Unauthorized(new ResultViewModel<string>("E04X16 - Não autorizado"));
+            return Unauthorized(new ResultViewModel<string>("E04X11 - Não autorizado"));
 
         try
         {
@@ -193,7 +193,7 @@ public class InstitutionTypeController : ControllerBase
                 .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
             if (institutionType == null)
-                return NotFound(new ResultViewModel<string>("E04X17 - Conteúdo não encontrado"));
+                return NotFound(new ResultViewModel<string>("E04X12 - Conteúdo não encontrado"));
 
             context.InstitutionTypes.Remove(institutionType);
             await context.SaveChangesAsync();
@@ -205,13 +205,13 @@ public class InstitutionTypeController : ControllerBase
             var msg = ex.InnerException?.Message;
 
             if (!string.IsNullOrEmpty(msg))
-                return StatusCode(400, new ResultViewModel<string>($"E04X18 - Impossível excluir o tipo de instituição: {msg}"));
+                return StatusCode(400, new ResultViewModel<string>($"E04X13 - Impossível excluir o tipo de instituição: {msg}"));
             else
-                return StatusCode(400, new ResultViewModel<string>("E04X18 - Impossível excluir o tipo de instituição"));
+                return StatusCode(400, new ResultViewModel<string>("E04X13 - Impossível excluir o tipo de instituição"));
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<string>("E04X19 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<string>("E04X14 - Falha interna no servidor"));
         }
     }
 
@@ -222,7 +222,7 @@ public class InstitutionTypeController : ControllerBase
         [FromServices] MoneyDataContext context)
     {
         if (!int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out int userId))
-            return Unauthorized(new ResultViewModel<InstitutionType>("E04X20 - Não autorizado"));
+            return Unauthorized(new ResultViewModel<InstitutionType>("E04X15 - Não autorizado"));
 
         try
         {
@@ -230,7 +230,7 @@ public class InstitutionTypeController : ControllerBase
                 .FirstOrDefaultAsync(x => x.Id == id && x.UserId == userId);
 
             if (institutionType == null)
-                return NotFound(new ResultViewModel<InstitutionType>("E04X21 - Conteúdo não encontrado"));
+                return NotFound(new ResultViewModel<InstitutionType>("E04X16 - Conteúdo não encontrado"));
 
             institutionType.Active = !institutionType.Active;
 
@@ -241,7 +241,7 @@ public class InstitutionTypeController : ControllerBase
         }
         catch (Exception)
         {
-            return StatusCode(500, new ResultViewModel<InstitutionType>("E04X22 - Falha interna no servidor"));
+            return StatusCode(500, new ResultViewModel<InstitutionType>("E04X17 - Falha interna no servidor"));
         }
     }
 }

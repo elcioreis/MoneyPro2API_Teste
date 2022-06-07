@@ -8,8 +8,6 @@ public class Institution
     {
         Nickname = String.Empty;
         Description = String.Empty;
-        User = new User();
-        InstitutionType = new InstitutionType();
     }
 
     public int Id { get; set; }
@@ -18,7 +16,7 @@ public class Institution
     public User? User { get; set; }
     public int InstitutionTypeId { get; set; }
     [JsonIgnore]
-    public InstitutionType InstitutionType { get; set; }
+    public InstitutionType? InstitutionType { get; set; }
     public string Nickname { get; set; }
     public string Description { get; set; }
     public int? BankNumber { get; set; }

@@ -35,6 +35,14 @@ public class MoneyDataContext : DbContext
 
         // Insere o Real Brasileiro como moeda padrão no sistema
         modelBuilder.Entity<Coin>()
-            .HasData(new Coin { Id = 1, Nickname = "Real Brasileiro", Symbol = "R$", Default = true, Virtual = false, Active = true });
+            .HasData(new Coin
+            {
+                Id = 1,
+                Nickname = "Real Brasileiro",
+                Symbol = "R$",
+                Default = true,
+                Virtual = false,
+                Active = true
+            });
     }
 }
