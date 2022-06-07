@@ -7,8 +7,8 @@ public static class Hash
 {
     public static string Generator(LoginViewModel model)
     {
-        var parte01 = Generator(model.Email + model.Password);
-        var parte02 = Generator("MoneyPro2" + model.Password);
+        var parte01 = Generator("MoneyPro2" + model.Password);
+        var parte02 = Generator("Autenticação" + model.Password);
         return parte01 + parte02;
     }
     public static string Generator(string input)

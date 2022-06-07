@@ -8,6 +8,6 @@ public class CoinViewModel
     public string Nickname { get; set; }
 
     [Required(ErrorMessage = "O símbolo é obrigatório")]
-    [MaxLength(25, ErrorMessage = "O símbol não deve passar de 10 caracteres")]
+    [MaxLength(25, ErrorMessage = "O símbolo não deve passar de 10 caracteres")]
     public string Symbol { get; set; }
 }

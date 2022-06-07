@@ -14,6 +14,7 @@ public class MoneyDataContext : DbContext
     public DbSet<Coin> Coins { get; set; }
     public DbSet<InstitutionType> InstitutionTypes { get; set; }
     public DbSet<Institution> Institutions { get; set; }
+    public DbSet<Entry> Entries { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,6 +24,7 @@ public class MoneyDataContext : DbContext
         modelBuilder.ApplyConfiguration(new CoinMap());
         modelBuilder.ApplyConfiguration(new InstitutionTypeMap());
         modelBuilder.ApplyConfiguration(new InstitutionMap());
+        modelBuilder.ApplyConfiguration(new EntryMap());
 
         // Insere os "Roles" ao criar o banco
         modelBuilder.Entity<Role>()
@@ -33,6 +35,14 @@ public class MoneyDataContext : DbContext
 
         // Insere o Real Brasileiro como moeda padrão no sistema
         modelBuilder.Entity<Coin>()
-            .HasData(new Coin { Id = 1, Nickname = "Real Brasileiro", Symbol = "R$", Default = true, Virtual = false, Active = true });
+            .HasData(new Coin
+            {
+                Id = 1,
+                Nickname = "Real Brasileiro",
+                Symbol = "R$",
+                Default = true,
+                Virtual = false,
+                Active = true
+            });
     }
 }

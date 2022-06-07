@@ -3,28 +3,27 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MoneyPro2.Models;
 
 namespace MoneyPro2.Data.Mappings;
-public class InstitutionTypeMap : IEntityTypeConfiguration<InstitutionType>
+public class EntryMap : IEntityTypeConfiguration<Entry>
 {
-    public void Configure(EntityTypeBuilder<InstitutionType> builder)
+    public void Configure(EntityTypeBuilder<Entry> builder)
     {
-        builder.ToTable("InstitutionType");
-
+        builder.ToTable("Entry");
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
-            .HasColumnName("Id")
-            .HasColumnType("INT")
-            .ValueGeneratedOnAdd()
-            .UseIdentityColumn();
+          .HasColumnName("Id")
+          .HasColumnType("INT")
+          .ValueGeneratedOnAdd()
+          .UseIdentityColumn();
 
         builder.Property(x => x.UserId)
             .IsRequired()
             .HasColumnName("UserId")
             .HasColumnType("INT");
 
-        builder.Property(x => x.Nickname)
+        builder.Property(x => x.Name)
             .IsRequired()
-            .HasColumnName("Nickname")
+            .HasColumnName("Name")
             .HasColumnType("VARCHAR")
             .HasMaxLength(40);
 
@@ -40,13 +39,12 @@ public class InstitutionTypeMap : IEntityTypeConfiguration<InstitutionType>
             .HasColumnType("BIT")
             .HasDefaultValueSql("1");
 
-        builder.HasIndex(x => new { x.UserId, x.Nickname }, "IX_InstitutionType_UserId_Nickname").IsUnique();
+        builder.Property(x => x.System)
+            .IsRequired()
+            .HasColumnName("System")
+            .HasColumnType("BIT")
+            .HasDefaultValueSql("0");
 
-        builder
-            .HasMany(x => x.Institutions)
-            .WithOne(x => x.InstitutionType)
-            .HasForeignKey("InstitutionTypeId")
-            .HasConstraintName("Fk_Institution_InstitutionType")
-            .OnDelete(DeleteBehavior.NoAction);
+        builder.HasIndex(x => new { x.UserId, x.Name }, "IX_Entry_UserId_Name").IsUnique();
     }
 }

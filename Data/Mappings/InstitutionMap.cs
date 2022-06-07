@@ -30,13 +30,13 @@ public class InstitutionMap : IEntityTypeConfiguration<Institution>
             .IsRequired()
             .HasColumnName("Nickname")
             .HasColumnType("VARCHAR")
-            .HasMaxLength(25);
+            .HasMaxLength(40);
 
         builder.Property(x => x.Description)
             .IsRequired()
             .HasColumnName("Description")
             .HasColumnType("VARCHAR")
-            .HasMaxLength(100);
+            .HasMaxLength(150);
 
         builder.Property(x => x.BankNumber)
             .IsRequired(false)
