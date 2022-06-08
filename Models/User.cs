@@ -33,4 +33,6 @@ public class User
     public IList<Institution> Institutions { get; set; }
     [JsonIgnore]
     public IList<Entry> Entries { get; set; }
+    [JsonIgnore]
+    public IList<CategoryGroup> CategoryGroups { get; set; }
 }

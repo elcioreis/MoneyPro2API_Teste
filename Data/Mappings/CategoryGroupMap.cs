@@ -3,27 +3,22 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using MoneyPro2.Models;
 
 namespace MoneyPro2.Data.Mappings;
-public class InstitutionMap : IEntityTypeConfiguration<Institution>
+public class CategoryGroupMap : IEntityTypeConfiguration<CategoryGroup>
 {
-    public void Configure(EntityTypeBuilder<Institution> builder)
+    public void Configure(EntityTypeBuilder<CategoryGroup> builder)
     {
-        builder.ToTable("Institution");
+        builder.ToTable("CategoryGroup");
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.Id)
-            .HasColumnName("Id")
-            .HasColumnType("INT")
-            .ValueGeneratedOnAdd()
-            .UseIdentityColumn();
+          .HasColumnName("Id")
+          .HasColumnType("INT")
+          .ValueGeneratedOnAdd()
+          .UseIdentityColumn();
 
         builder.Property(x => x.UserId)
             .IsRequired()
             .HasColumnName("UserId")
-            .HasColumnType("INT");
-
-        builder.Property(x => x.InstitutionTypeId)
-            .IsRequired()
-            .HasColumnName("InstitutionTypeId")
             .HasColumnType("INT");
 
         builder.Property(x => x.Name)
@@ -38,17 +33,12 @@ public class InstitutionMap : IEntityTypeConfiguration<Institution>
             .HasColumnType("VARCHAR")
             .HasMaxLength(150);
 
-        builder.Property(x => x.BankNumber)
-            .IsRequired(false)
-            .HasColumnName("BankNumber")
-            .HasColumnType("INT");
-
         builder.Property(x => x.Active)
             .IsRequired()
             .HasColumnName("Active")
             .HasColumnType("BIT")
             .HasDefaultValueSql("1");
 
-        builder.HasIndex(x => new { x.UserId, x.Name }, "IX_Institution_UserId_Name").IsUnique();
+        builder.HasIndex(x => new { x.UserId, x.Name }, "IX_CategoryGroup_UserId_Name").IsUnique();
     }
 }

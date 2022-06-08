@@ -23,7 +23,7 @@ public class CoinController : ControllerBase
         {
             var coins = await context.Coins
                 .AsNoTracking()
-                .OrderBy(x => x.Nickname)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return Ok(new ResultViewModel<List<Coin>>(coins));
@@ -44,7 +44,7 @@ public class CoinController : ControllerBase
             var coins = await context.Coins
                 .AsNoTracking()
                 .Where(x => x.Active)
-                .OrderBy(x => x.Nickname)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return Ok(new ResultViewModel<List<Coin>>(coins));
@@ -114,7 +114,7 @@ public class CoinController : ControllerBase
         {
             var coin = new Coin()
             {
-                Nickname = model.Nickname,
+                Name = model.Name,
                 Symbol = model.Symbol,
                 Default = false,
                 Virtual = false,
@@ -160,7 +160,7 @@ public class CoinController : ControllerBase
             if (coin == null)
                 return NotFound(new ResultViewModel<Coin>(ModelState.GetErrors("E03X11 - Conteúdo não encontrado")));
 
-            coin.Nickname = model.Nickname;
+            coin.Name = model.Name;
             coin.Symbol = model.Symbol;
 
             context.Coins.Update(coin);
@@ -300,7 +300,7 @@ public class CoinController : ControllerBase
             context.Coins.Remove(coin);
             await context.SaveChangesAsync();
 
-            return Ok(new ResultViewModel<String>($"A moeda {coin.Nickname} foi excluída", null));
+            return Ok(new ResultViewModel<String>($"A moeda {coin.Name} foi excluída", null));
         }
         catch (DbUpdateException ex)
         {

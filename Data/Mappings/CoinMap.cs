@@ -15,9 +15,9 @@ public class CoinMap : IEntityTypeConfiguration<Coin>
             .ValueGeneratedOnAdd()
             .UseIdentityColumn();
 
-        builder.Property(x => x.Nickname)
+        builder.Property(x => x.Name)
             .IsRequired()
-            .HasColumnName("Nickname")
+            .HasColumnName("Name")
             .HasColumnType("VARCHAR")
             .HasMaxLength(25);
 
@@ -43,6 +43,6 @@ public class CoinMap : IEntityTypeConfiguration<Coin>
             .HasColumnType("BIT");
 
         builder.HasIndex(x => x.Symbol, "IX_Coin_Symbol").IsUnique();
-        builder.HasIndex(x => x.Nickname, "IX_Coin_Nickname").IsUnique();
+        builder.HasIndex(x => x.Name, "IX_Coin_Name").IsUnique();
     }
 }

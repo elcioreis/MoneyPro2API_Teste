@@ -22,6 +22,45 @@ namespace MoneyPro2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("MoneyPro2.Models.CategoryGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasColumnName("Active")
+                        .HasDefaultValueSql("1");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("VARCHAR(150)")
+                        .HasColumnName("Description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("VARCHAR(40)")
+                        .HasColumnName("Name");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INT")
+                        .HasColumnName("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "UserId", "Name" }, "IX_CategoryGroup_UserId_Name")
+                        .IsUnique();
+
+                    b.ToTable("CategoryGroup", (string)null);
+                });
+
             modelBuilder.Entity("MoneyPro2.Models.Coin", b =>
                 {
                     b.Property<int>("Id")
@@ -39,11 +78,11 @@ namespace MoneyPro2.Migrations
                         .HasColumnType("BIT")
                         .HasColumnName("Default");
 
-                    b.Property<string>("Nickname")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("VARCHAR(25)")
-                        .HasColumnName("Nickname");
+                        .HasColumnName("Name");
 
                     b.Property<string>("Symbol")
                         .IsRequired()
@@ -57,7 +96,7 @@ namespace MoneyPro2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "Nickname" }, "IX_Coin_Nickname")
+                    b.HasIndex(new[] { "Name" }, "IX_Coin_Name")
                         .IsUnique();
 
                     b.HasIndex(new[] { "Symbol" }, "IX_Coin_Symbol")
@@ -71,7 +110,7 @@ namespace MoneyPro2.Migrations
                             Id = 1,
                             Active = true,
                             Default = true,
-                            Nickname = "Real Brasileiro",
+                            Name = "Real Brasileiro",
                             Symbol = "R$",
                             Virtual = false
                         });
@@ -151,11 +190,11 @@ namespace MoneyPro2.Migrations
                         .HasColumnType("INT")
                         .HasColumnName("InstitutionTypeId");
 
-                    b.Property<string>("Nickname")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("VARCHAR(40)")
-                        .HasColumnName("Nickname");
+                        .HasColumnName("Name");
 
                     b.Property<int>("UserId")
                         .HasColumnType("INT")
@@ -165,7 +204,7 @@ namespace MoneyPro2.Migrations
 
                     b.HasIndex("InstitutionTypeId");
 
-                    b.HasIndex(new[] { "UserId", "Nickname" }, "IX_Institution_UserId_Nickname")
+                    b.HasIndex(new[] { "UserId", "Name" }, "IX_Institution_UserId_Name")
                         .IsUnique();
 
                     b.ToTable("Institution", (string)null);
@@ -192,11 +231,11 @@ namespace MoneyPro2.Migrations
                         .HasColumnType("VARCHAR(150)")
                         .HasColumnName("Description");
 
-                    b.Property<string>("Nickname")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(40)
                         .HasColumnType("VARCHAR(40)")
-                        .HasColumnName("Nickname");
+                        .HasColumnName("Name");
 
                     b.Property<int>("UserId")
                         .HasColumnType("INT")
@@ -204,7 +243,7 @@ namespace MoneyPro2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "UserId", "Nickname" }, "IX_InstitutionType_UserId_Nickname")
+                    b.HasIndex(new[] { "UserId", "Name" }, "IX_InstitutionType_UserId_Name")
                         .IsUnique();
 
                     b.ToTable("InstitutionType", (string)null);
@@ -354,6 +393,18 @@ namespace MoneyPro2.Migrations
                     b.ToTable("UserRole");
                 });
 
+            modelBuilder.Entity("MoneyPro2.Models.CategoryGroup", b =>
+                {
+                    b.HasOne("MoneyPro2.Models.User", "User")
+                        .WithMany("CategoryGroups")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("Fk_CategoryGroups_User");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MoneyPro2.Models.Entry", b =>
                 {
                     b.HasOne("MoneyPro2.Models.User", "User")
@@ -435,6 +486,8 @@ namespace MoneyPro2.Migrations
 
             modelBuilder.Entity("MoneyPro2.Models.User", b =>
                 {
+                    b.Navigation("CategoryGroups");
+
                     b.Navigation("Entries");
 
                     b.Navigation("InstitutionTypes");

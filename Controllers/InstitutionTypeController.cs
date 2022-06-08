@@ -27,7 +27,7 @@ public class InstitutionTypeController : ControllerBase
             var institutionTypes = await context.InstitutionTypes
                 .AsNoTracking()
                 .Where(x => x.UserId == userId)
-                .OrderBy(x => x.Nickname)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return Ok(new ResultViewModel<List<InstitutionType>>(institutionTypes));
@@ -51,7 +51,7 @@ public class InstitutionTypeController : ControllerBase
             var institutionTypes = await context.InstitutionTypes
                 .AsNoTracking()
                 .Where(x => x.UserId == userId && x.Active)
-                .OrderBy(x => x.Nickname)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return Ok(new ResultViewModel<List<InstitutionType>>(institutionTypes));
@@ -103,7 +103,7 @@ public class InstitutionTypeController : ControllerBase
         var institutionType = new InstitutionType()
         {
             UserId = userId,
-            Nickname = model.Nickname,
+            Name = model.Name,
             Description = model.Description,
             Active = true
         };
@@ -153,7 +153,7 @@ public class InstitutionTypeController : ControllerBase
             if (institutionType == null)
                 return NotFound(new ResultViewModel<InstitutionType>("E04X0E - Conteúdo não encontrado"));
 
-            institutionType.Nickname = model.Nickname;
+            institutionType.Name = model.Name;
             institutionType.Description = model.Description;
 
             context.InstitutionTypes.Update(institutionType);
@@ -198,7 +198,7 @@ public class InstitutionTypeController : ControllerBase
             context.InstitutionTypes.Remove(institutionType);
             await context.SaveChangesAsync();
 
-            return Ok(new ResultViewModel<String>($"O tipo de instituição {institutionType.Nickname} foi excluído", null));
+            return Ok(new ResultViewModel<String>($"O tipo de instituição {institutionType.Name} foi excluído", null));
         }
         catch (DbUpdateException ex)
         {

@@ -7,6 +7,10 @@
 #
 # Histórico de atualizações 
 # 
+# Branch20220607
+# Criação da classe CategoryGroup e seu mapeamento para o banco de dados,
+# controller CategoryGroupController e CategoryGroupViewModel
+#
 # Branch20220603
 # Criação da classe Entry e seu mapeamento para o banco de dados,
 # controller EntryController e EntryViewModel
