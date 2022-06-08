@@ -6,3 +6,12 @@ E03 - CoinController
 E04 - InstitutionTypeController
 E05 - InstitutionController
 E06 - EntryController
+E07 - CategoryGroupController
+
+--
+
+Mensagens de erro padrão:
+Não autorizado				(falha na autorização, como falta de Id no claim)
+Conteúdo não encontrado		(Quando pesquisado por Id e não houver o Id ou o Id pertecer a outro usuário)
+Conteúdo mal formatado		(Quando houver má formatação do JSON de entrada)
+Falha interna no servidor	(Qualquer falha do banco de dados ou servidor, como banco de dados fora do ar)

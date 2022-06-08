@@ -300,7 +300,7 @@ public class CoinController : ControllerBase
             context.Coins.Remove(coin);
             await context.SaveChangesAsync();
 
-            return Ok(new ResultViewModel<String>($"A moeda {coin.Name} foi excluída", null));
+            return Ok(new ResultViewModel<String>($"A moeda {coin.Name} foi excluída", false));
         }
         catch (DbUpdateException ex)
         {

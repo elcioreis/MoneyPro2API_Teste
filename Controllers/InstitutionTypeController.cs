@@ -198,7 +198,7 @@ public class InstitutionTypeController : ControllerBase
             context.InstitutionTypes.Remove(institutionType);
             await context.SaveChangesAsync();
 
-            return Ok(new ResultViewModel<String>($"O tipo de instituição {institutionType.Name} foi excluído", null));
+            return Ok(new ResultViewModel<String>($"O tipo de instituição {institutionType.Name} foi excluído", false));
         }
         catch (DbUpdateException ex)
         {
