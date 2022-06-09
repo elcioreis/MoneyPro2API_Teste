@@ -40,5 +40,12 @@ public class CategoryGroupMap : IEntityTypeConfiguration<CategoryGroup>
             .HasDefaultValueSql("1");
 
         builder.HasIndex(x => new { x.UserId, x.Name }, "IX_CategoryGroup_UserId_Name").IsUnique();
+
+        builder
+            .HasMany(x => x.Categories)
+            .WithOne(x => x.CategoryGroup)
+            .HasForeignKey("CategoryGroupId")
+            .HasConstraintName("FK_Category_CategoryGroup")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

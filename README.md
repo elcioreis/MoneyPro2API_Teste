@@ -7,6 +7,10 @@
 #
 # Histórico de atualizações 
 # 
+# Branch20220609
+# Criação da classe Category e seu mapeamento para o banco de dados,
+# controller CategoryController e CategoryViewModel
+#
 # Branch20220607
 # Criação da classe CategoryGroup e seu mapeamento para o banco de dados,
 # controller CategoryGroupController e CategoryGroupViewModel
