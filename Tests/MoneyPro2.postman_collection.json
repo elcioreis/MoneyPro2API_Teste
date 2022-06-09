@@ -381,7 +381,46 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"Elcio Marques dos Reis\",\r\n    \"email\":\"elcio.reis@gmail.com\",\r\n    \"controlstart\":\"2015-04-30\",\r\n    \"password\":\"reis@L3pr1l0p3\"\r\n}",
+							"raw": "{\r\n    \"name\":\"Elcio Marques dos Reis\",\r\n    \"email\":\"elcio.reis@gmail.com\",\r\n    \"controlstart\":\"2015-04-30\",\r\n    \"password\":\"Abcd@12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQyOTM1MDEsImV4cCI6MTY1NDMyMjMwMSwiaWF0IjoxNjU0MjkzNTAxfQ.jl9i_ivyoR_OrA4_mOiDtlzoJJ_sDRdScyYERjyqlQQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Elcio Reis\",\r\n    \"email\":\"elcio.reis@outlook.com\",\r\n    \"controlstart\":\"2015-04-30\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -552,7 +591,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTM5Mzc0MTUsImV4cCI6MTY1Mzk2NjIxNSwiaWF0IjoxNjUzOTM3NDE1fQ.30teis2UHuIIZUsG-q21JJ43xMx4CY00Nm6Z1tTZLz8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAb3V0bG9vay5jb20iLCJyb2xlIjoidXNlciIsIm5iZiI6MTY1NDUyODY3NCwiZXhwIjoxNjU0NTU3NDc0LCJpYXQiOjE2NTQ1Mjg2NzR9.Xy_Koh3VtdddA3EX7T1RokX_EGHMCSPe7iurO39hB5g",
 									"type": "string"
 								}
 							]
@@ -561,7 +600,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nickname\":\"Ticket\",\r\n    \"description\":\"Administradora de Ticket Refeição ou Alimentação\"\r\n}",
+							"raw": "{\r\n    \"nickname\":\"Bancos\",\r\n    \"description\":\"Bancos em território nacional\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -906,13 +945,308 @@
 			]
 		},
 		{
+			"name": "Entry",
+			"item": [
+				{
+					"name": "v1/entry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAb3V0bG9vay5jb20iLCJyb2xlIjoidXNlciIsIm5iZiI6MTY1NDUyODY3NCwiZXhwIjoxNjU0NTU3NDc0LCJpYXQiOjE2NTQ1Mjg2NzR9.Xy_Koh3VtdddA3EX7T1RokX_EGHMCSPe7iurO39hB5g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Oficina BMW\",\r\n    \"description\":\"Conserto de carros\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/entry",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"entry"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/entry/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAb3V0bG9vay5jb20iLCJyb2xlIjoidXNlciIsIm5iZiI6MTY1NDUyODY3NCwiZXhwIjoxNjU0NTU3NDc0LCJpYXQiOjE2NTQ1Mjg2NzR9.Xy_Koh3VtdddA3EX7T1RokX_EGHMCSPe7iurO39hB5g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Restaurante Japonês\",\r\n    \"description\":\"Japa 4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/entry/7",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"entry",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/entry/all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAb3V0bG9vay5jb20iLCJyb2xlIjoidXNlciIsIm5iZiI6MTY1NDUyODY3NCwiZXhwIjoxNjU0NTU3NDc0LCJpYXQiOjE2NTQ1Mjg2NzR9.Xy_Koh3VtdddA3EX7T1RokX_EGHMCSPe7iurO39hB5g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"institutiontypeid\":5,\r\n    \"nickname\":\"Dinheiro\",\r\n    \"description\":\"Dinheiro em caixa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/institution",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/entry/active",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAb3V0bG9vay5jb20iLCJyb2xlIjoidXNlciIsIm5iZiI6MTY1NDUyODY3NCwiZXhwIjoxNjU0NTU3NDc0LCJpYXQiOjE2NTQ1Mjg2NzR9.Xy_Koh3VtdddA3EX7T1RokX_EGHMCSPe7iurO39hB5g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"institutiontypeid\":5,\r\n    \"nickname\":\"Dinheiro\",\r\n    \"description\":\"Dinheiro em caixa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/entry/active",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"entry",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/entry/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAb3V0bG9vay5jb20iLCJyb2xlIjoidXNlciIsIm5iZiI6MTY1NDUyODY3NCwiZXhwIjoxNjU0NTU3NDc0LCJpYXQiOjE2NTQ1Mjg2NzR9.Xy_Koh3VtdddA3EX7T1RokX_EGHMCSPe7iurO39hB5g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"institutiontypeid\":5,\r\n    \"nickname\":\"Dinheiro\",\r\n    \"description\":\"Dinheiro em caixa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/institution",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"institution"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/entry/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAb3V0bG9vay5jb20iLCJyb2xlIjoidXNlciIsIm5iZiI6MTY1NDYyODY4MiwiZXhwIjoxNjU0NjU3NDgyLCJpYXQiOjE2NTQ2Mjg2ODJ9.MhgTqwjL8FfjaOFyQEgPr9Di2jHo6eRejRyhVB5L6ac",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"institutiontypeid\":5,\r\n    \"nickname\":\"Dinheiro\",\r\n    \"description\":\"Dinheiro em caixa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/entry/8",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"entry",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CategoryGroup",
+			"item": [
+				{
+					"name": "v1/CategoryGroup",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQ3MDAzMjgsImV4cCI6MTY1NDcyOTEyOCwiaWF0IjoxNjU0NzAwMzI4fQ.mP-Vx9MD1Wpk-C66wj5MRsTxqBp7-8YF7lUWjQMWqcI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Automóvel\",\r\n    \"description\":\"Despesas com manutenção do carro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/categorygroup",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"categorygroup"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "v1/Login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"elcio.reis@gmail.com\",\r\n    \"password\":\"reis@L3pr1l0p3\"\r\n}",
+					"raw": "{\r\n    \"email\":\"elcio.reis@gmail.com\",\r\n    \"password\":\"Abcd@12345\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

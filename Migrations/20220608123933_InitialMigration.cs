@@ -15,7 +15,7 @@ namespace MoneyPro2.Migrations
                 {
                     Id = table.Column<int>(type: "INT", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nickname = table.Column<string>(type: "VARCHAR(25)", maxLength: 25, nullable: false),
+                    Name = table.Column<string>(type: "VARCHAR(25)", maxLength: 25, nullable: false),
                     Symbol = table.Column<string>(type: "VARCHAR(10)", maxLength: 10, nullable: false),
                     Default = table.Column<bool>(type: "BIT", nullable: false),
                     Virtual = table.Column<bool>(type: "BIT", nullable: false),
@@ -56,6 +56,73 @@ namespace MoneyPro2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CategoryGroup",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INT", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "INT", nullable: false),
+                    Name = table.Column<string>(type: "VARCHAR(40)", maxLength: 40, nullable: false),
+                    Description = table.Column<string>(type: "VARCHAR(150)", maxLength: 150, nullable: false),
+                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CategoryGroup", x => x.Id);
+                    table.ForeignKey(
+                        name: "Fk_CategoryGroups_User",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Entry",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INT", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "INT", nullable: false),
+                    Name = table.Column<string>(type: "VARCHAR(40)", maxLength: 40, nullable: false),
+                    Description = table.Column<string>(type: "VARCHAR(150)", maxLength: 150, nullable: false),
+                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1"),
+                    System = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "0")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Entry", x => x.Id);
+                    table.ForeignKey(
+                        name: "Fk_Entry_User",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InstitutionType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INT", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "INT", nullable: false),
+                    Name = table.Column<string>(type: "VARCHAR(40)", maxLength: 40, nullable: false),
+                    Description = table.Column<string>(type: "VARCHAR(150)", maxLength: 150, nullable: false),
+                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InstitutionType", x => x.Id);
+                    table.ForeignKey(
+                        name: "Fk_InstitutionTypes_User",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -103,9 +170,37 @@ namespace MoneyPro2.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Institution",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INT", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "INT", nullable: false),
+                    InstitutionTypeId = table.Column<int>(type: "INT", nullable: false),
+                    Name = table.Column<string>(type: "VARCHAR(40)", maxLength: 40, nullable: false),
+                    Description = table.Column<string>(type: "VARCHAR(150)", maxLength: 150, nullable: false),
+                    BankNumber = table.Column<int>(type: "INT", nullable: true),
+                    Active = table.Column<bool>(type: "BIT", nullable: false, defaultValueSql: "1")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Institution", x => x.Id);
+                    table.ForeignKey(
+                        name: "Fk_Institution_InstitutionType",
+                        column: x => x.InstitutionTypeId,
+                        principalTable: "InstitutionType",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "Fk_Institution_User",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id");
+                });
+
             migrationBuilder.InsertData(
                 table: "Coin",
-                columns: new[] { "Id", "Active", "Default", "Nickname", "Symbol", "Virtual" },
+                columns: new[] { "Id", "Active", "Default", "Name", "Symbol", "Virtual" },
                 values: new object[] { 1, true, true, "Real Brasileiro", "R$", false });
 
             migrationBuilder.InsertData(
@@ -119,15 +214,44 @@ namespace MoneyPro2.Migrations
                 values: new object[] { 2, "user", "user" });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Coin_Nickname",
+                name: "IX_CategoryGroup_UserId_Name",
+                table: "CategoryGroup",
+                columns: new[] { "UserId", "Name" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Coin_Name",
                 table: "Coin",
-                column: "Nickname",
+                column: "Name",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Coin_Symbol",
                 table: "Coin",
                 column: "Symbol",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Entry_UserId_Name",
+                table: "Entry",
+                columns: new[] { "UserId", "Name" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Institution_InstitutionTypeId",
+                table: "Institution",
+                column: "InstitutionTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Institution_UserId_Name",
+                table: "Institution",
+                columns: new[] { "UserId", "Name" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_InstitutionType_UserId_Name",
+                table: "InstitutionType",
+                columns: new[] { "UserId", "Name" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -169,13 +293,25 @@ namespace MoneyPro2.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CategoryGroup");
+
+            migrationBuilder.DropTable(
                 name: "Coin");
+
+            migrationBuilder.DropTable(
+                name: "Entry");
+
+            migrationBuilder.DropTable(
+                name: "Institution");
 
             migrationBuilder.DropTable(
                 name: "Login");
 
             migrationBuilder.DropTable(
                 name: "UserRole");
+
+            migrationBuilder.DropTable(
+                name: "InstitutionType");
 
             migrationBuilder.DropTable(
                 name: "Role");

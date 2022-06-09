@@ -12,6 +12,11 @@ public class ResultViewModel<T>
         Data = data;
     }
 
+    public ResultViewModel(T data, bool errors)
+    {
+        Data = data;
+    }
+
     public ResultViewModel(List<string> errors)
     {
         Errors = errors;

@@ -5,7 +5,7 @@ public class InstitutionType
 {
     public InstitutionType()
     {
-        Nickname = String.Empty;
+        Name = String.Empty;
         Description = String.Empty;
         Institutions = new List<Institution>();
     }
@@ -13,7 +13,7 @@ public class InstitutionType
     public int UserId { get; set; }
     [JsonIgnore]
     public User? User { get; set; }
-    public string Nickname { get; set; }
+    public string Name { get; set; }
     public string Description { get; set; }
     public bool Active { get; set; }
     [JsonIgnore]

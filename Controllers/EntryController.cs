@@ -223,7 +223,7 @@ public class EntryController : ControllerBase
             context.Entries.Remove(entry);
             await context.SaveChangesAsync();
 
-            return Ok(new ResultViewModel<string>($"A entrada {entry.Name} foi excluída", null));
+            return Ok(new ResultViewModel<string>($"A entrada {entry.Name} foi excluída", false));
         }
         catch (Exception)
         {

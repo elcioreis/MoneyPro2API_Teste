@@ -22,9 +22,9 @@ public class InstitutionTypeMap : IEntityTypeConfiguration<InstitutionType>
             .HasColumnName("UserId")
             .HasColumnType("INT");
 
-        builder.Property(x => x.Nickname)
+        builder.Property(x => x.Name)
             .IsRequired()
-            .HasColumnName("Nickname")
+            .HasColumnName("Name")
             .HasColumnType("VARCHAR")
             .HasMaxLength(40);
 
@@ -40,7 +40,7 @@ public class InstitutionTypeMap : IEntityTypeConfiguration<InstitutionType>
             .HasColumnType("BIT")
             .HasDefaultValueSql("1");
 
-        builder.HasIndex(x => new { x.UserId, x.Nickname }, "IX_InstitutionType_UserId_Nickname").IsUnique();
+        builder.HasIndex(x => new { x.UserId, x.Name }, "IX_InstitutionType_UserId_Name").IsUnique();
 
         builder
             .HasMany(x => x.Institutions)

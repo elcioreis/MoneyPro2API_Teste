@@ -12,8 +12,8 @@ using MoneyPro2.Data;
 namespace MoneyPro2.Migrations
 {
     [DbContext(typeof(MoneyDataContext))]
-    [Migration("20220530152605_InstitutionType")]
-    partial class InstitutionType
+    [Migration("20220608123933_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,45 @@ namespace MoneyPro2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("MoneyPro2.Models.CategoryGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasColumnName("Active")
+                        .HasDefaultValueSql("1");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("VARCHAR(150)")
+                        .HasColumnName("Description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("VARCHAR(40)")
+                        .HasColumnName("Name");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INT")
+                        .HasColumnName("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "UserId", "Name" }, "IX_CategoryGroup_UserId_Name")
+                        .IsUnique();
+
+                    b.ToTable("CategoryGroup", (string)null);
+                });
 
             modelBuilder.Entity("MoneyPro2.Models.Coin", b =>
                 {
@@ -41,11 +80,11 @@ namespace MoneyPro2.Migrations
                         .HasColumnType("BIT")
                         .HasColumnName("Default");
 
-                    b.Property<string>("Nickname")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(25)
                         .HasColumnType("VARCHAR(25)")
-                        .HasColumnName("Nickname");
+                        .HasColumnName("Name");
 
                     b.Property<string>("Symbol")
                         .IsRequired()
@@ -59,7 +98,7 @@ namespace MoneyPro2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "Nickname" }, "IX_Coin_Nickname")
+                    b.HasIndex(new[] { "Name" }, "IX_Coin_Name")
                         .IsUnique();
 
                     b.HasIndex(new[] { "Symbol" }, "IX_Coin_Symbol")
@@ -73,10 +112,104 @@ namespace MoneyPro2.Migrations
                             Id = 1,
                             Active = true,
                             Default = true,
-                            Nickname = "Real Brasileiro",
+                            Name = "Real Brasileiro",
                             Symbol = "R$",
                             Virtual = false
                         });
+                });
+
+            modelBuilder.Entity("MoneyPro2.Models.Entry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasColumnName("Active")
+                        .HasDefaultValueSql("1");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("VARCHAR(150)")
+                        .HasColumnName("Description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("VARCHAR(40)")
+                        .HasColumnName("Name");
+
+                    b.Property<bool>("System")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasColumnName("System")
+                        .HasDefaultValueSql("0");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INT")
+                        .HasColumnName("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "UserId", "Name" }, "IX_Entry_UserId_Name")
+                        .IsUnique();
+
+                    b.ToTable("Entry", (string)null);
+                });
+
+            modelBuilder.Entity("MoneyPro2.Models.Institution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INT")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Active")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("BIT")
+                        .HasColumnName("Active")
+                        .HasDefaultValueSql("1");
+
+                    b.Property<int?>("BankNumber")
+                        .HasColumnType("INT")
+                        .HasColumnName("BankNumber");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("VARCHAR(150)")
+                        .HasColumnName("Description");
+
+                    b.Property<int>("InstitutionTypeId")
+                        .HasColumnType("INT")
+                        .HasColumnName("InstitutionTypeId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("VARCHAR(40)")
+                        .HasColumnName("Name");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INT")
+                        .HasColumnName("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InstitutionTypeId");
+
+                    b.HasIndex(new[] { "UserId", "Name" }, "IX_Institution_UserId_Name")
+                        .IsUnique();
+
+                    b.ToTable("Institution", (string)null);
                 });
 
             modelBuilder.Entity("MoneyPro2.Models.InstitutionType", b =>
@@ -96,15 +229,15 @@ namespace MoneyPro2.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("VARCHAR(100)")
+                        .HasMaxLength(150)
+                        .HasColumnType("VARCHAR(150)")
                         .HasColumnName("Description");
 
-                    b.Property<string>("Nickname")
+                    b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(25)
-                        .HasColumnType("VARCHAR(25)")
-                        .HasColumnName("Nickname");
+                        .HasMaxLength(40)
+                        .HasColumnType("VARCHAR(40)")
+                        .HasColumnName("Name");
 
                     b.Property<int>("UserId")
                         .HasColumnType("INT")
@@ -112,7 +245,7 @@ namespace MoneyPro2.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex(new[] { "UserId", "Nickname" }, "IX_InstitutionType_UserId_Nickname")
+                    b.HasIndex(new[] { "UserId", "Name" }, "IX_InstitutionType_UserId_Name")
                         .IsUnique();
 
                     b.ToTable("InstitutionType", (string)null);
@@ -262,6 +395,51 @@ namespace MoneyPro2.Migrations
                     b.ToTable("UserRole");
                 });
 
+            modelBuilder.Entity("MoneyPro2.Models.CategoryGroup", b =>
+                {
+                    b.HasOne("MoneyPro2.Models.User", "User")
+                        .WithMany("CategoryGroups")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("Fk_CategoryGroups_User");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MoneyPro2.Models.Entry", b =>
+                {
+                    b.HasOne("MoneyPro2.Models.User", "User")
+                        .WithMany("Entries")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("Fk_Entry_User");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("MoneyPro2.Models.Institution", b =>
+                {
+                    b.HasOne("MoneyPro2.Models.InstitutionType", "InstitutionType")
+                        .WithMany("Institutions")
+                        .HasForeignKey("InstitutionTypeId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("Fk_Institution_InstitutionType");
+
+                    b.HasOne("MoneyPro2.Models.User", "User")
+                        .WithMany("Institutions")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired()
+                        .HasConstraintName("Fk_Institution_User");
+
+                    b.Navigation("InstitutionType");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MoneyPro2.Models.InstitutionType", b =>
                 {
                     b.HasOne("MoneyPro2.Models.User", "User")
@@ -303,9 +481,20 @@ namespace MoneyPro2.Migrations
                         .HasConstraintName("FK_UserRole_UserId");
                 });
 
+            modelBuilder.Entity("MoneyPro2.Models.InstitutionType", b =>
+                {
+                    b.Navigation("Institutions");
+                });
+
             modelBuilder.Entity("MoneyPro2.Models.User", b =>
                 {
+                    b.Navigation("CategoryGroups");
+
+                    b.Navigation("Entries");
+
                     b.Navigation("InstitutionTypes");
+
+                    b.Navigation("Institutions");
 
                     b.Navigation("Logins");
                 });

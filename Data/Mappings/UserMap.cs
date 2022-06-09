@@ -101,5 +101,12 @@ public class UserMap : IEntityTypeConfiguration<User>
             .HasForeignKey("UserId")
             .HasConstraintName("Fk_Entry_User")
             .OnDelete(DeleteBehavior.Cascade);
+
+        builder
+            .HasMany(x => x.CategoryGroups)
+            .WithOne(x => x.User)
+            .HasForeignKey("UserId")
+            .HasConstraintName("Fk_CategoryGroups_User")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

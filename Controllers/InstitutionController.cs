@@ -27,7 +27,7 @@ public class InstitutionController : ControllerBase
             var institutions = await context.Institutions
                .AsNoTracking()
                .Where(x => x.UserId == userId)
-               .OrderBy(x => x.Nickname)
+               .OrderBy(x => x.Name)
                .ToListAsync();
 
             return Ok(new ResultViewModel<List<Institution>>(institutions));
@@ -51,7 +51,7 @@ public class InstitutionController : ControllerBase
             var institutions = await context.Institutions
                .AsNoTracking()
                .Where(x => x.UserId == userId && x.Active)
-               .OrderBy(x => x.Nickname)
+               .OrderBy(x => x.Name)
                .ToListAsync();
 
             return Ok(new ResultViewModel<List<Institution>>(institutions));
@@ -112,7 +112,7 @@ public class InstitutionController : ControllerBase
             {
                 UserId = userId,
                 InstitutionTypeId = institutionType.Id,
-                Nickname = model.Nickname,
+                Name = model.Name,
                 Description = model.Description,
                 BankNumber = model.BankNumber
             };
@@ -160,7 +160,7 @@ public class InstitutionController : ControllerBase
                 return NotFound(new ResultViewModel<Institution>("E05X14 - Conteúdo não encontrado"));
 
             institution.InstitutionTypeId = model.InstitutionTypeId;
-            institution.Nickname = model.Nickname;
+            institution.Name = model.Name;
             institution.Description = model.Description;
             institution.BankNumber = model.BankNumber;
 
@@ -205,7 +205,7 @@ public class InstitutionController : ControllerBase
             context.Institutions.Remove(institution);
             await context.SaveChangesAsync();
 
-            return Ok(new ResultViewModel<string>($"A instituição {institution.Nickname} foi excluída", null));
+            return Ok(new ResultViewModel<string>($"A instituição {institution.Name} foi excluída", false));
         }
         catch (DbUpdateException ex)
         {
