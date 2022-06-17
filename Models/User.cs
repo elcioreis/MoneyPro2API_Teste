@@ -14,7 +14,8 @@ public class User
         InstitutionTypes = new List<InstitutionType>();
         Institutions = new List<Institution>();
         Entries = new List<Entry>();
-
+        CategoryGroups = new List<CategoryGroup>();
+        Categories = new List<Category>();
     }
     public int Id { get; set; }
     public string Name { get; set; }
@@ -35,4 +36,6 @@ public class User
     public IList<Entry> Entries { get; set; }
     [JsonIgnore]
     public IList<CategoryGroup> CategoryGroups { get; set; }
+    [JsonIgnore]
+    public IList<Category> Categories { get; set; }
 }

@@ -7,6 +7,7 @@ E04 - InstitutionTypeController
 E05 - InstitutionController
 E06 - EntryController
 E07 - CategoryGroupController
+E08 - CategoryController
 
 --
 

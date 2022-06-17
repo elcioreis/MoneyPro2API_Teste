@@ -86,7 +86,7 @@ public class UserMap : IEntityTypeConfiguration<User>
             .WithOne(x => x.User)
             .HasForeignKey("UserId")
             .HasConstraintName("Fk_InstitutionTypes_User")
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .HasMany(x => x.Institutions)
@@ -100,13 +100,20 @@ public class UserMap : IEntityTypeConfiguration<User>
             .WithOne(x => x.User)
             .HasForeignKey("UserId")
             .HasConstraintName("Fk_Entry_User")
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.NoAction);
 
         builder
             .HasMany(x => x.CategoryGroups)
             .WithOne(x => x.User)
             .HasForeignKey("UserId")
-            .HasConstraintName("Fk_CategoryGroups_User")
-            .OnDelete(DeleteBehavior.Cascade);
+            .HasConstraintName("Fk_CategoryGroup_User")
+            .OnDelete(DeleteBehavior.NoAction);
+
+        builder
+            .HasMany(x => x.Categories)
+            .WithOne(x => x.User)
+            .HasForeignKey("UserId")
+            .HasConstraintName("Fk_Category_User")
+            .OnDelete(DeleteBehavior.NoAction);
     }
 }

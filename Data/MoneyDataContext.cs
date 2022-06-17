@@ -16,6 +16,7 @@ public class MoneyDataContext : DbContext
     public DbSet<Institution> Institutions { get; set; }
     public DbSet<Entry> Entries { get; set; }
     public DbSet<CategoryGroup> CategoryGroups { get; set; }
+    public DbSet<Category> Categories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -27,6 +28,7 @@ public class MoneyDataContext : DbContext
         modelBuilder.ApplyConfiguration(new InstitutionMap());
         modelBuilder.ApplyConfiguration(new EntryMap());
         modelBuilder.ApplyConfiguration(new CategoryGroupMap());
+        modelBuilder.ApplyConfiguration(new CategoryMap());
 
         // Insere os "Roles" ao criar o banco
         modelBuilder.Entity<Role>()
