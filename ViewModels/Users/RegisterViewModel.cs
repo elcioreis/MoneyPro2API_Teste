@@ -11,7 +11,7 @@ public class RegisterViewModel
     public string Email { get; set; }
     public DateTime ControlStart { get; set; }
 
-    [RegularExpression(@"^^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$",
+    [RegularExpression(@"^(?=(.*[a-z]){1,})(?=(.*[A-Z]){1,})(?=(.*[0-9]){1,})(?=(.*[!@#$%^&*()\-__+.]){1,}).{8,}$",
          ErrorMessage = "A senha deve conter números, maiúsculas, minúsculas, símbolos especiais e ao menos 8 caracteres.")]
     public string Password { get; set; }
 }

@@ -111,20 +111,20 @@ public class UserController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(new ResultViewModel<string>(ModelState.GetErrors("E02X07 - Conteúdo mal formatado")));
 
-        var user = await context
-            .Users
-            .AsNoTracking()
-            .Include(x => x.Roles)
-            .FirstOrDefaultAsync(x => x.Email == model.Email);
-
-        if (user == null)
-            return Unauthorized(new ResultViewModel<string>("Usuário ou senha inválidos"));
-
-        if (user.PasswordHash != Hash.Generator(new LoginViewModel() { Email = model.Email, Password = model.Password }))
-            return Unauthorized(new ResultViewModel<string>("Usuário ou senha inválidos"));
-
         try
         {
+            var user = await context
+                .Users
+                .AsNoTracking()
+                .Include(x => x.Roles)
+                .FirstOrDefaultAsync(x => x.Email == model.Email);
+
+            if (user == null)
+                return Unauthorized(new ResultViewModel<string>("Usuário ou senha inválidos"));
+
+            if (user.PasswordHash != Hash.Generator(new LoginViewModel() { Email = model.Email, Password = model.Password }))
+                return Unauthorized(new ResultViewModel<string>("Usuário ou senha inválidos"));
+
             RegisterLogin(context, user);
 
             var token = tokenService.GenerateToken(user);

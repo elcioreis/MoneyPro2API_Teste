@@ -17,7 +17,6 @@ public class Category
     public int? CategoryParentId { get; set; }
     [JsonIgnore]
     public Category CategoryParent { get; set; }
-    [JsonIgnore]
     public int? CategoryGroupId { get; set; }
     [JsonIgnore]
     public CategoryGroup CategoryGroup { get; set; }

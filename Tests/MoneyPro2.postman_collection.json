@@ -1199,6 +1199,68 @@
 			"name": "CategoryGroup",
 			"item": [
 				{
+					"name": "v1/CategoryGroup/All",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQ3MDAzMjgsImV4cCI6MTY1NDcyOTEyOCwiaWF0IjoxNjU0NzAwMzI4fQ.mP-Vx9MD1Wpk-C66wj5MRsTxqBp7-8YF7lUWjQMWqcI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/categorygroup/all",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"categorygroup",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/CategoryGroup/Active",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQ3MDAzMjgsImV4cCI6MTY1NDcyOTEyOCwiaWF0IjoxNjU0NzAwMzI4fQ.mP-Vx9MD1Wpk-C66wj5MRsTxqBp7-8YF7lUWjQMWqcI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/categorygroup/active",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"categorygroup",
+								"active"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "v1/CategoryGroup",
 					"request": {
 						"auth": {
@@ -1232,6 +1294,118 @@
 							"path": [
 								"v1",
 								"categorygroup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/CategoryGroup/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQ3MDAzMjgsImV4cCI6MTY1NDcyOTEyOCwiaWF0IjoxNjU0NzAwMzI4fQ.mP-Vx9MD1Wpk-C66wj5MRsTxqBp7-8YF7lUWjQMWqcI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Trabalho\",\r\n    \"description\":\"Receitas proveniente de trabalho\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/categorygroup/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"categorygroup",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/CategoryGroup/active/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQ3MDAzMjgsImV4cCI6MTY1NDcyOTEyOCwiaWF0IjoxNjU0NzAwMzI4fQ.mP-Vx9MD1Wpk-C66wj5MRsTxqBp7-8YF7lUWjQMWqcI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7151/v1/categorygroup/active/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"categorygroup",
+								"active",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "v1/CategoryGroup/{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRWxjaW8gTWFycXVlcyBkb3MgUmVpcyIsIm5hbWVpZCI6IjEiLCJlbWFpbCI6ImVsY2lvLnJlaXNAZ21haWwuY29tIiwicm9sZSI6InVzZXIiLCJuYmYiOjE2NTQ3MjMxNjEsImV4cCI6MTY1NDc1MTk2MSwiaWF0IjoxNjU0NzIzMTYxfQ.C-Q-Ku42hseTYAjjMqZ3aL8TF8ECjRLo8Xafir45mlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7151/v1/categorygroup/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7151",
+							"path": [
+								"v1",
+								"categorygroup",
+								"3"
 							]
 						}
 					},
